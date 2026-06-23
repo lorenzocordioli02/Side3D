@@ -1,0 +1,2222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Side 3D Studio — Product Visuals That Sell</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Epilogue:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── DESIGN TOKENS ───────────────────────────────── */
+    :root {
+      /* Brand palette */
+      --lavender:   #C8C9DD;
+      --gold:       #D19A5A;
+      --terra:      #A35047;
+
+      /* Surfaces */
+      --bg:         #F5F3EF;
+      --bg-warm:    #EFECE6;
+      --bg-card:    #FAFAF8;
+      --ink:        #1A1715;
+      --ink-mid:    #3D3A36;
+      --ink-light:  #8A8680;
+
+      /* Borders */
+      --rule:       rgba(26,23,21,0.10);
+      --rule-mid:   rgba(26,23,21,0.06);
+
+      /* Chapter dividers (dark) */
+      --chapter-bg: #141210;
+
+      /* Type */
+      --mono: 'IBM Plex Mono', monospace;
+      --sans: 'Epilogue', sans-serif;
+
+      /* Spacing */
+      --pad-x: clamp(1.5rem, 6vw, 5rem);
+      --section-y: clamp(5rem, 10vw, 9rem);
+      --radius: 4px;
+      --radius-lg: 10px;
+    }
+
+    /* ─── RESET ───────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 400;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    img, video { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── GRAIN TEXTURE ───────────────────────────────── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9000;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)' opacity='0.035'/%3E%3C/svg%3E");
+      opacity: 1;
+    }
+
+    /* ─── UTILITY ─────────────────────────────────────── */
+    .mono  { font-family: var(--mono); }
+    .tag {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.85rem;
+      border-radius: 999px;
+      border: 1px solid currentColor;
+    }
+    .tag-lavender { color: #6b6d91; background: rgba(200,201,221,0.25); border-color: rgba(200,201,221,0.6); }
+    .tag-gold     { color: #7a5520; background: rgba(209,154,90,0.15);  border-color: rgba(209,154,90,0.5); }
+    .tag-terra    { color: var(--terra); background: rgba(163,80,71,0.08); border-color: rgba(163,80,71,0.35); }
+
+    /* ─── NAV ─────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem var(--pad-x);
+      background: rgba(245,243,239,0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--rule);
+      transition: background 0.3s;
+    }
+    .nav-logo {
+      font-family: var(--mono);
+      font-weight: 600;
+      font-size: 0.88rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+    .nav-logo-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--terra);
+      flex-shrink: 0;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-cta {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.5rem 1.3rem;
+      background: var(--ink);
+      color: var(--bg);
+      border-radius: var(--radius);
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-cta:hover { background: var(--terra); }
+
+    /* ─── LANG SELECTOR ───────────────────────────────── */
+    .lang-selector {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--ink-light);
+      margin-left: 0.5rem;
+    }
+    .lang-btn {
+      background: none;
+      border: none;
+      color: inherit;
+      cursor: pointer;
+      padding: 0;
+      font-family: inherit;
+      font-size: inherit;
+      letter-spacing: 0.08em;
+      transition: color 0.2s;
+    }
+    .lang-btn:hover { color: var(--ink); }
+    .lang-btn.active { color: var(--terra); font-weight: 600; }
+    .lang-div { opacity: 0.4; }
+
+    /* ─── HERO ────────────────────────────────────────── */
+    #hero {
+      min-height: 100svh;
+      padding: 0 var(--pad-x);
+      display: grid;
+      grid-template-rows: 1fr auto;
+      position: relative;
+      overflow: hidden;
+      background: var(--bg);
+    }
+
+    /* Large decorative "SIDE 3D" text background */
+    .hero-bg-text {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -52%);
+      font-family: var(--mono);
+      font-weight: 700;
+      font-size: clamp(5rem, 14vw, 14rem);
+      letter-spacing: -0.04em;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(163,80,71,0.12);
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+      line-height: 1;
+    }
+
+    /* Coloured shape blobs */
+    .hero-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(70px);
+      pointer-events: none;
+    }
+    .hero-blob-1 {
+      width: min(480px,55vw); height: min(480px,55vw);
+      background: radial-gradient(circle, rgba(200,201,221,0.45) 0%, transparent 70%);
+      top: 8%; right: -5%;
+      animation: blobDrift 14s ease-in-out infinite alternate;
+    }
+    .hero-blob-2 {
+      width: min(320px,38vw); height: min(320px,38vw);
+      background: radial-gradient(circle, rgba(209,154,90,0.30) 0%, transparent 70%);
+      bottom: 12%; left: 8%;
+      animation: blobDrift 10s ease-in-out infinite alternate-reverse;
+    }
+    .hero-blob-3 {
+      width: min(200px,25vw); height: min(200px,25vw);
+      background: radial-gradient(circle, rgba(163,80,71,0.22) 0%, transparent 70%);
+      top: 35%; left: 30%;
+      animation: blobDrift 16s ease-in-out infinite alternate;
+    }
+    @keyframes blobDrift {
+      from { transform: translate(0,0) scale(1); }
+      to   { transform: translate(4%,6%) scale(1.08); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: clamp(6rem, 14vw, 11rem);
+      padding-bottom: 3rem;
+      max-width: 900px;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: slideUp 0.7s 0.1s ease forwards;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px; height: 1px;
+      background: var(--terra);
+      flex-shrink: 0;
+    }
+
+    .hero-h1 {
+      font-family: var(--mono);
+      font-size: clamp(2.8rem, 7.5vw, 7rem);
+      font-weight: 700;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.75rem;
+      opacity: 0;
+      animation: slideUp 0.75s 0.2s ease forwards;
+    }
+    .hero-h1 .line-accent {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--ink-light);
+    }
+    .hero-h1 .word-gold { color: var(--gold); }
+    .hero-h1 .word-terra { color: var(--terra); }
+
+    .hero-sub {
+      font-family: var(--sans);
+      font-size: clamp(1rem, 1.8vw, 1.15rem);
+      color: var(--ink-mid);
+      max-width: 480px;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: slideUp 0.75s 0.32s ease forwards;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 0.85rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: slideUp 0.75s 0.44s ease forwards;
+    }
+    .btn-fill {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.85rem 2rem;
+      background: var(--ink);
+      color: var(--bg);
+      border-radius: var(--radius);
+      transition: background 0.2s;
+    }
+    .btn-fill:hover { background: var(--terra); }
+    .btn-outline {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.85rem 2rem;
+      border: 1px solid rgba(26,23,21,0.3);
+      border-radius: var(--radius);
+      color: var(--ink-mid);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--terra); color: var(--terra); }
+
+    /* Hero bottom bar */
+    .hero-bottom {
+      position: relative;
+      z-index: 1;
+      padding-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--rule);
+      padding-top: 1.25rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+      opacity: 0;
+      animation: fadeIn 1s 0.7s ease forwards;
+    }
+    .hero-stat {
+      display: flex;
+      flex-direction: column;
+    }
+    .hero-stat-num {
+      font-family: var(--mono);
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      color: var(--ink);
+    }
+    .hero-stat-num span { color: var(--gold); }
+    .hero-stat-label {
+      font-size: 0.75rem;
+      color: var(--ink-light);
+      font-family: var(--mono);
+      letter-spacing: 0.04em;
+      margin-top: 0.2rem;
+    }
+    .hero-scroll {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+    }
+    .scroll-arrow {
+      width: 28px; height: 28px;
+      border: 1px solid var(--rule-mid);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      animation: bounce 2s ease-in-out infinite;
+    }
+    @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(4px)} }
+
+    /* ─── SERVICES STRIP ──────────────────────────────── */
+    .services-strip {
+      background: var(--ink);
+      padding: 1.5rem var(--pad-x);
+      display: flex;
+      align-items: center;
+      gap: 0;
+      overflow: hidden;
+    }
+    .strip-track {
+      display: flex;
+      gap: 0;
+      animation: marquee 22s linear infinite;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .strip-item {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(245,243,239,0.55);
+      padding: 0 3rem;
+      flex-shrink: 0;
+    }
+    .strip-item .dot { color: var(--gold); margin-right: 3rem; }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ─── SECTION SHARED ──────────────────────────────── */
+    .section-pad {
+      padding: var(--section-y) var(--pad-x);
+    }
+    .section-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      margin-bottom: 1rem;
+    }
+    .section-eyebrow::after {
+      content: '';
+      flex: 1;
+      max-width: 48px;
+      height: 1px;
+      background: var(--ink-light);
+      opacity: 0.4;
+    }
+    .section-title {
+      font-family: var(--mono);
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.02;
+      margin-bottom: 1.25rem;
+    }
+    .section-sub {
+      font-family: var(--sans);
+      font-size: 1rem;
+      color: var(--ink-mid);
+      max-width: 480px;
+      line-height: 1.7;
+    }
+    .section-header { margin-bottom: clamp(2.5rem, 6vw, 4.5rem); }
+
+    /* ─── CHAPTER DIVIDER ─────────────────────────────── */
+    .chapter-divider {
+      background: var(--chapter-bg);
+      padding: 3rem var(--pad-x);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+    .chapter-divider::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 100% at 15% 50%, rgba(209,154,90,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .chapter-num {
+      font-family: var(--mono);
+      font-size: clamp(4rem, 12vw, 10rem);
+      font-weight: 700;
+      letter-spacing: -0.05em;
+      line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(245,243,239,0.15);
+      position: relative;
+      z-index: 1;
+    }
+    .chapter-label {
+      font-family: var(--mono);
+      font-size: clamp(1.5rem, 4vw, 3.5rem);
+      font-weight: 300;
+      letter-spacing: 0.02em;
+      color: rgba(245,243,239,0.9);
+      text-align: right;
+      position: relative;
+      z-index: 1;
+    }
+    .chapter-label strong {
+      display: block;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    /* ─── PORTFOLIO ───────────────────────────────────── */
+    #portfolio { background: var(--bg-warm); }
+    .portfolio-inner { max-width: 1240px; margin: 0 auto; }
+
+    .subsection-label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .subsection-label span { color: var(--terra); }
+
+    /* Product images — 3 col */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem; /* Separated cards for clean scaling */
+      margin-bottom: 4rem;
+    }
+    .product-card {
+      position: relative;
+      aspect-ratio: 4/3;
+      background: var(--bg-card);
+      overflow: hidden;
+      cursor: pointer;
+      border: 1px solid var(--rule);
+      border-radius: var(--radius-lg);
+      transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .product-card img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .product-card:hover {
+      transform: scale(1.03) translateY(-4px);
+      box-shadow: 0 20px 40px rgba(26,23,21,0.12);
+      z-index: 10;
+    }
+    .product-card:hover img { transform: scale(1.08); }
+    .product-hover {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(26,23,21,0.9) 0%, rgba(163,80,71,0.4) 40%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.75rem;
+    }
+    .product-card:hover .product-hover { opacity: 1; }
+    
+    .product-hover-content {
+      transform: translateY(15px);
+      transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .product-card:hover .product-hover-content {
+      transform: translateY(0);
+    }
+    .product-hover-label {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+    .product-hover-desc {
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      color: rgba(245,243,239,0.85);
+      line-height: 1.5;
+      opacity: 0;
+      transition: opacity 0.5s 0.1s ease;
+    }
+    .product-card:hover .product-hover-desc {
+      opacity: 1;
+    }
+
+    /* Placeholder cells */
+    .placeholder-cell {
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.85rem;
+      background: var(--bg-card);
+      color: var(--ink-light);
+    }
+    .placeholder-cell svg { opacity: 0.25; }
+    .placeholder-cell p {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      color: var(--ink-light);
+      opacity: 0.6;
+    }
+
+    /* Videos — 2×2 grid */
+    .videos-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-bottom: 4rem;
+    }
+    .video-card {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      aspect-ratio: 16/9;
+      position: relative;
+    }
+    .video-card video {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .video-card:nth-child(1),
+    .video-card:nth-child(2) {
+      grid-column: span 2;
+    }
+    .custom-controls {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 20px;
+      padding: 0 10px;
+      display: flex;
+      align-items: flex-end;
+      padding-bottom: 10px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      cursor: pointer;
+      z-index: 10;
+      background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+    }
+    .video-card:hover .custom-controls {
+      opacity: 1;
+    }
+    .video-timeline {
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 2px;
+      position: relative;
+      transition: height 0.2s ease;
+    }
+    .custom-controls:hover .video-timeline {
+      height: 6px;
+    }
+    .video-timeline-progress {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background: var(--gold);
+      border-radius: 2px;
+      width: 0%;
+      pointer-events: none;
+    }
+    .video-placeholder {
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      background: var(--chapter-bg);
+    }
+    .play-btn {
+      width: 50px; height: 50px;
+      border-radius: 50%;
+      border: 1px solid rgba(209,154,90,0.4);
+      background: rgba(209,154,90,0.08);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold);
+      transition: background 0.2s;
+    }
+    .video-card:hover .play-btn { background: rgba(209,154,90,0.18); }
+    .video-placeholder p {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-Ftransform: uppercase;
+      color: rgba(245,243,239,0.3);
+    }
+
+    /* Gallery — 2x2 col */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    .gallery-card {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--rule);
+      aspect-ratio: 16/9;
+      background: var(--bg-card);
+      cursor: pointer;
+      position: relative;
+    }
+    .gallery-card img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .gallery-card:hover img { transform: scale(1.06); }
+    .gallery-card .placeholder-cell { border-radius: 0; }
+
+    /* ─── ABOUT ───────────────────────────────────────── */
+    #about { background: var(--bg); }
+    .about-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: clamp(2.5rem, 6vw, 6rem);
+      align-items: start;
+    }
+
+    /* Photo column */
+    .about-photo-wrap { position: relative; }
+    .about-photo-frame {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      aspect-ratio: 3/4;
+      background: var(--lavender);
+      border: 1px solid var(--rule);
+      position: relative;
+    }
+    .about-photo-frame img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: bottom;
+      filter: grayscale(15%);
+      transition: filter 0.4s;
+    }
+    .about-photo-frame:hover img { filter: grayscale(0%); }
+
+    /* Floating contact card */
+    .about-contact-card {
+      position: absolute;
+      bottom: -1.5rem;
+      right: -1.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.5rem;
+      min-width: 220px;
+      box-shadow: 0 8px 32px rgba(26,23,21,0.08);
+    }
+    .contact-card-name {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.75rem;
+      color: var(--ink);
+    }
+    .contact-card-line {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--ink-light);
+      margin-bottom: 0.35rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .contact-card-line .dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    /* Text column */
+    .about-text {}
+    .about-text .section-title { margin-bottom: 1.5rem; }
+    .about-text p {
+      font-size: 1rem;
+      color: var(--ink-mid);
+      line-height: 1.8;
+      margin-bottom: 1.1rem;
+    }
+    .about-text p strong { color: var(--ink); font-weight: 500; }
+
+    .about-services {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      margin-top: 2rem;
+      border: 1px solid var(--rule);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .about-service-item {
+      padding: 1.25rem 1.5rem;
+      border-right: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      position: relative;
+    }
+    .about-service-item:nth-child(even) { border-right: none; }
+    .about-service-item:nth-last-child(-n+2) { border-bottom: none; }
+    .about-service-item::before {
+      content: '';
+      position: absolute;
+      top: 1.25rem; left: 1.5rem;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+    .about-service-label {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink);
+      padding-left: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+    }
+    .about-service-desc {
+      font-size: 0.82rem;
+      color: var(--ink-light);
+      padding-left: 1.1rem;
+      line-height: 1.5;
+    }
+
+    /* ─── CONTACT SECTION ─── */
+    .contact-section {
+      background: var(--bg-warm);
+      padding: var(--section-y) var(--pad-x);
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: clamp(3rem, 7vw, 7rem);
+      align-items: start;
+    }
+    .contact-left { position: sticky; top: calc(5rem + 2vw); display: flex; flex-direction: column; gap: 0; }
+    .contact-title { font-family: var(--mono); font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.02; margin-top: 0.75rem; margin-bottom: 1.5rem; }
+    .contact-title em { font-style: italic; font-weight: 300; color: var(--ink-light); }
+    .contact-sub { font-family: var(--sans); font-size: 0.95rem; color: var(--ink-mid); line-height: 1.75; max-width: 340px; margin-bottom: 2.5rem; }
+    .contact-details { display: flex; flex-direction: column; gap: 0; border-top: 1px solid var(--rule); margin-bottom: 2.5rem; }
+    .contact-detail-item { display: flex; flex-direction: column; gap: 0.2rem; padding: 1rem 0; border-bottom: 1px solid var(--rule); }
+    .contact-detail-label { font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-light); }
+    .contact-detail-value { font-family: var(--mono); font-size: 0.82rem; color: var(--ink); transition: color 0.2s; word-break: break-all; }
+    a.contact-detail-value:hover { color: var(--terra); }
+    .contact-accent-bar { display: flex; gap: 0.5rem; align-items: center; }
+    .contact-accent-dot { width: 8px; height: 8px; border-radius: 50%; display: block; }
+
+    /* ── Right column — Form card ── */
+    .contact-right { background: var(--bg-card); border: 1px solid var(--rule); border-radius: var(--radius-lg); padding: clamp(2rem, 4vw, 3rem); }
+    .contact-form { display: flex; flex-direction: column; gap: 2rem; }
+    .cf-field { display: flex; flex-direction: column; gap: 0.6rem; }
+    .cf-label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-light); display: flex; align-items: center; gap: 0.6rem; cursor: pointer; }
+    .cf-label-num { color: var(--terra); font-weight: 600; }
+    .cf-input-wrap { position: relative; }
+    .cf-input { width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--rule); border-radius: 0; outline: none; font-family: var(--sans); font-size: 1rem; color: var(--ink); padding: 0.65rem 0; transition: border-color 0.25s; resize: none; line-height: 1.6; }
+    .cf-input::placeholder { color: rgba(138, 134, 128, 0.5); font-size: 0.9rem; }
+    .cf-input:focus { border-color: transparent; }
+    .cf-input:focus + .cf-input-line,
+    .cf-input:not(:placeholder-shown) + .cf-input-line { transform: scaleX(1); }
+    .cf-input-line { position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background: var(--terra); transform: scaleX(0); transform-origin: left; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); pointer-events: none; }
+    .cf-textarea { min-height: 130px; }
+    .cf-footer { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; padding-top: 0.5rem; border-top: 1px solid var(--rule); }
+    .cf-submit { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.85rem 2rem; background: var(--ink); color: var(--bg); border: none; border-radius: var(--radius); cursor: pointer; display: flex; align-items: center; gap: 0.75rem; transition: background 0.22s, gap 0.22s; }
+    .cf-submit:hover { background: var(--terra); gap: 1rem; }
+    .cf-submit:active { transform: translateY(1px); }
+    .cf-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+    .cf-submit-icon { display: flex; align-items: center; transition: transform 0.22s; }
+    .cf-submit:hover .cf-submit-icon { transform: translateX(2px); }
+    .cf-note { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em; color: var(--ink-light); }
+    .cf-feedback { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.04em; min-height: 1.4rem; transition: opacity 0.3s; }
+    .cf-feedback.success { color: #5a8a5a; }
+    .cf-feedback.error   { color: var(--terra); }
+    .cf-field.invalid .cf-input { border-bottom-color: var(--terra); }
+    .cf-field.invalid .cf-label { color: var(--terra); }
+
+    /* ─── CTA ─────────────────────────────────────────── */
+    #cta {
+      background: var(--chapter-bg);
+      padding: var(--section-y) var(--pad-x);
+      position: relative;
+      overflow: hidden;
+    }
+    #cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 80% at 80% 50%, rgba(200,201,221,0.07) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 50% at 15% 80%, rgba(209,154,90,0.07) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .cta-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .cta-inner .section-eyebrow { color: rgba(245,243,239,0.35); }
+    .cta-inner .section-eyebrow::after { background: rgba(245,243,239,0.2); }
+    .cta-title {
+      font-family: var(--mono);
+      font-size: clamp(2.5rem, 7vw, 6rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+      color: rgba(245,243,239,0.9);
+      margin-bottom: 2rem;
+    }
+    .cta-title .accent-gold { color: var(--gold); }
+    .cta-title .accent-terra { color: var(--terra); }
+    .cta-title em { font-style: italic; font-weight: 300; color: rgba(245,243,239,0.4); }
+    .cta-sub {
+      font-size: 1rem;
+      color: rgba(245,243,239,0.45);
+      max-width: 420px;
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+    }
+    .cta-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-fill-light {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.9rem 2.2rem;
+      background: var(--gold);
+      color: var(--chapter-bg);
+      border-radius: var(--radius);
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    .btn-fill-light:hover { background: #e0a660; }
+    .btn-outline-light {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.9rem 2.2rem;
+      border: 1px solid rgba(245,243,239,0.2);
+      color: rgba(245,243,239,0.55);
+      border-radius: var(--radius);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline-light:hover { border-color: rgba(245,243,239,0.5); color: rgba(245,243,239,0.85); }
+
+    .cta-contact-strip {
+      margin-top: 3.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(245,243,239,0.08);
+      display: flex;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .cta-contact-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .cta-contact-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(245,243,239,0.3);
+    }
+    .cta-contact-value {
+      font-family: var(--mono);
+      font-size: 0.88rem;
+      color: rgba(245,243,239,0.7);
+      transition: color 0.2s;
+    }
+    .cta-contact-value:hover { color: var(--gold); }
+
+    /* ─── FOOTER ──────────────────────────────────────── */
+    footer {
+      background: var(--chapter-bg);
+      padding: 1.75rem var(--pad-x);
+      border-top: 1px solid rgba(245,243,239,0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-logo {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: rgba(245,243,239,0.6);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .footer-logo .dot-small {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--terra);
+    }
+    footer p {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: rgba(245,243,239,0.2);
+      letter-spacing: 0.06em;
+    }
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .footer-links a {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(245,243,239,0.3);
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+
+    /* ─── SCROLL REVEAL ───────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ─── MODAL CAROUSEL ──────────────────────────────── */
+    #carousel-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 10, 10, 0.95);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+    #carousel-modal.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .carousel-content {
+      position: relative;
+      max-width: 90vw;
+      max-height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .carousel-content img {
+      max-width: 100%;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: var(--radius);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    }
+    .carousel-close {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 3rem;
+      cursor: pointer;
+      z-index: 10001;
+      transition: color 0.2s;
+    }
+    .carousel-close:hover { color: var(--terra); }
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10001;
+      transition: background 0.2s;
+    }
+    .carousel-btn:hover { background: rgba(255,255,255,0.2); }
+    .carousel-prev { left: 2rem; }
+    .carousel-next { right: 2rem; }
+
+    /* ─── HOW IT WORKS ────────────────────────────────── */
+    #process { background: var(--bg-warm); }
+    .process-grid {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(3rem, 8vw, 6rem);
+      align-items: center;
+    }
+
+    /* Left: Media Showcases (Slider) */
+    .process-media { display: flex; flex-direction: column; gap: 2.5rem; }
+    .showcase-wrap { display: flex; flex-direction: column; gap: 1rem; }
+    .showcase-card {
+      background: var(--bg-card);
+      padding: 0.75rem;
+      border: 1px solid var(--rule);
+      border-radius: var(--radius-lg);
+    }
+    .showcase-image-container {
+      position: relative;
+      aspect-ratio: 16/9;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--rule-mid);
+      --position: 50%;
+    }
+    .showcase-image-container img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    
+    .image-before {
+      position: absolute;
+      inset: 0;
+      width: var(--position);
+      height: 100%;
+      overflow: hidden;
+      z-index: 2;
+    }
+    
+    .image-before img {
+      width: 100vw;
+      max-width: none;
+      height: 100%;
+      object-fit: cover;
+      object-position: left;
+    }
+    /* We make sure the inner image matches the container width. The easiest way is using min-width 100% of the container. */
+    .showcase-image-container > .image-before > img {
+       width: 100%; /* Will be updated via JS to match container width to prevent squishing */
+    }
+
+    .slider-handle {
+      position: absolute;
+      top: 0; bottom: 0;
+      left: var(--position);
+      width: 4px;
+      background: #fff;
+      transform: translateX(-50%);
+      z-index: 3;
+      pointer-events: none;
+    }
+    .slider-button {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 36px; height: 36px;
+      background: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      color: var(--ink);
+    }
+    
+    .slider-input {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      opacity: 0;
+      z-index: 4;
+      cursor: ew-resize;
+      margin: 0;
+    }
+
+    .showcase-tags {
+      position: absolute;
+      top: 1rem; left: 1rem; right: 1rem;
+      display: flex; justify-content: space-between;
+      pointer-events: none;
+      z-index: 5;
+    }
+    .showcase-tag {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.8rem;
+      border-radius: var(--radius);
+      background: rgba(26,23,21,0.85); /* Dark ink with opacity */
+      color: var(--bg);
+      backdrop-filter: blur(4px);
+      transition: opacity 0.2s;
+    }
+    .showcase-tag.finish { background: rgba(163,80,71,0.9); /* Terra color */ }
+    .showcase-caption {
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--ink-light);
+    }
+
+    /* Right: Timeline */
+    .timeline {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .timeline-step {
+      display: flex;
+      gap: 1.5rem;
+      position: relative;
+    }
+    /* The connecting line */
+    .timeline-step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 3rem; left: 1.25rem;
+      width: 1px; height: calc(100% - 1.5rem);
+      background: var(--rule);
+    }
+    .step-circle {
+      width: 2.5rem; height: 2.5rem;
+      border-radius: 50%;
+      border: 1px solid var(--rule); /* Changed to use standard rule */
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono);
+      color: var(--ink); /* Changed to ink */
+      font-weight: 600;
+      flex-shrink: 0;
+      background: var(--bg-card); /* Changed to card background */
+      position: relative;
+      z-index: 2;
+      transition: background 0.25s, border-color 0.25s, color 0.25s; /* Added transition */
+    }
+    
+    .timeline-step:hover .step-circle {
+      background: var(--terra);
+      border-color: var(--terra);
+      color: var(--bg);
+    }
+    
+    .step-content { padding-top: 0.4rem; }
+    
+    .step-tag {
+      margin-bottom: 0.6rem;
+    }
+    
+    .step-content h4 {
+      font-family: var(--mono); /* Changed to mono */
+      font-size: 1rem; /* Adjusted size */
+      font-weight: 600;
+      letter-spacing: -0.01em; /* Added letter spacing */
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+    .step-content p {
+      font-family: var(--sans);
+      font-size: 0.9rem; /* Adjusted size */
+      color: var(--ink-mid);
+      line-height: 1.7; /* Adjusted line height */
+      max-width: 340px; /* Added max-width */
+    }
+
+    /* ─── TITLE & EYEBROW OVERRIDES FOR PROCESS ─── */
+    .process-title {
+      font-family: var(--mono);
+      font-size: clamp(2rem, 4.5vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.02;
+      margin-bottom: 0.85rem;
+    }
+    .process-title em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--ink-light);
+    }
+    .process-subtitle {
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      color: var(--ink-mid);
+      line-height: 1.7;
+      max-width: 360px;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ─── ANIMATIONS ──────────────────────────────────── */
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(32px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @media (max-width: 900px) {
+      .process-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ─── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 1000px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .about-photo-wrap { max-width: 340px; }
+      .about-contact-card { right: 0; bottom: -1rem; }
+    }
+    @media (max-width: 860px) {
+      .contact-section { grid-template-columns: 1fr; }
+      .contact-left { position: static; }
+    }
+    @media (max-width: 760px) {
+      .products-grid { grid-template-columns: 1fr; }
+      .videos-grid   { grid-template-columns: 1fr; }
+      .video-card:nth-child(1),
+      .video-card:nth-child(2) { grid-column: span 1; }
+      .gallery-grid  { grid-template-columns: 1fr; }
+      .about-services { grid-template-columns: 1fr; }
+      .about-service-item { border-right: none; }
+      .nav-links { display: none; }
+      .hero-bg-text { font-size: 22vw; }
+    }
+    @media (max-width: 480px) {
+      .chapter-num  { font-size: 5rem; }
+      .chapter-label{ font-size: 1.8rem; }
+      .gallery-grid  { grid-template-columns: 1fr 1fr; }
+      .contact-right { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ░░ NAV ░░ -->
+  <nav>
+    <div class="nav-logo">
+      <div class="nav-logo-dot"></div>
+      SIDE 3D STUDIO
+    </div>
+    <ul class="nav-links">
+      <li><a href="#portfolio" data-it="Lavori">Work</a></li>
+      <li><a href="#about" data-it="Chi Sono">About</a></li>
+      <li><a href="#contact" data-it="Contatti">Contact</a></li>
+      <li class="lang-selector">
+        <button class="lang-btn active" onclick="setLang('en')">EN</button>
+        <span class="lang-div">/</span>
+        <button class="lang-btn" onclick="setLang('it')">IT</button>
+      </li>
+    </ul>
+    <a href="#contact" class="nav-cta" data-it="Parliamo">Let's Talk</a>
+  </nav>
+
+  <!-- ░░ HERO ░░ -->
+  <section id="hero">
+    <div class="hero-blob hero-blob-1"></div>
+    <div class="hero-blob hero-blob-2"></div>
+    <div class="hero-blob hero-blob-3"></div>
+    <div class="hero-bg-text" aria-hidden="true">SIDE&nbsp;3D</div>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow" data-it="Visual 3D per Brand Ecommerce">3D Visuals for Ecommerce Brands</div>
+
+      <h1 class="hero-h1" data-it="Il tuo prodotto,<br><span class='line-accent'>impossibile</span><br><span class='word-terra'>da</span>&nbsp;<span class='word-gold'>ignorare.</span>">
+        Your product,<br>
+        <span class="line-accent">impossible</span><br>
+        <span class="word-terra">to</span>&nbsp;<span class="word-gold">ignore.</span>
+      </h1>
+
+      <p class="hero-sub" data-it="Creiamo visual 3D e animazioni che fermano lo scroll, generano fiducia istantanea e trasformano i visitatori in clienti — senza bisogno di set fotografici.">
+        We make 3D visuals and animations that stop the scroll, build instant trust, and turn browsers into buyers — no photo shoot needed.
+      </p>
+
+      <div class="hero-btns">
+        <a href="#portfolio" class="btn-fill" data-it="Guarda i Lavori">See the Work</a>
+        <a href="#contact" class="btn-outline" data-it="Invia un Messaggio">Send a Message</a>
+      </div>
+    </div>
+
+    <div class="hero-bottom">
+      <div class="hero-stat">
+        <div class="hero-stat-num">50<span>+</span></div>
+        <div class="hero-stat-label" data-it="Brand elevati">Brands elevated</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">3<span>×</span></div>
+        <div class="hero-stat-label" data-it="Aumento medio CTR">Avg. CTR uplift</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">48<span>h</span></div>
+        <div class="hero-stat-label" data-it="Consegna prima bozza">First draft turnaround</div>
+      </div>
+      <div class="hero-scroll">
+        <div class="scroll-arrow">
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+        </div>
+        <span data-it="Scorri">Scroll</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ SERVICES MARQUEE STRIP ░░ -->
+  <div class="services-strip" aria-hidden="true">
+    <div class="strip-track">
+      <span class="strip-item" data-it="Visualizzazione Prodotto">Product Visualization</span>
+      <span class="strip-item"><span class="dot">·</span><span data-it="Animazione Prodotto">Product Animation</span></span>
+      <span class="strip-item"><span class="dot">·</span><span data-it="Generazione Video AI">AI Video Generation</span></span>
+      <span class="strip-item"><span class="dot">·</span><span data-it="Brand Ecommerce">Ecommerce Brands</span></span>
+      <span class="strip-item"><span class="dot">·</span><span data-it="Creatività Pubblicitarie">Ad Creatives</span></span>
+      <span class="strip-item"><span class="dot">·</span><span data-it="Visualizzazione Prodotto">Product Visualization</span></span>
+      <span class="strip-item"><span class="dot">·</span><span data-it="Animazione Prodotto">Product Animation</span></span>
+      <span class="strip-item"><span class="dot">·</span><span data-it="Generazione Video AI">AI Video Generation</span></span>
+      <span class="strip-item"><span class="dot">·</span><span data-it="Brand Ecommerce">Ecommerce Brands</span></span>
+      <span class="strip-item"><span class="dot">·</span><span data-it="Creatività Pubblicitarie">Ad Creatives</span></span>
+    </div>
+  </div>
+
+  <!-- ░░ CHAPTER 01 ░░ -->
+  <div class="chapter-divider">
+    <div class="chapter-num">01</div>
+    <div class="chapter-label" data-it="<strong>Visualizzazione</strong>Prodotto">
+      <strong>Product</strong>
+      Visualization
+    </div>
+  </div>
+
+  <!-- ░░ PORTFOLIO ░░ -->
+  <section id="portfolio" class="section-pad">
+    <div class="portfolio-inner">
+
+      <div class="section-header reveal">
+        <div class="section-eyebrow" data-it="Portfolio">Portfolio</div>
+        <h2 class="section-title" data-it="Il lavoro<br>parla da solo.">The work<br>speaks for itself.</h2>
+        <p class="section-sub" data-it="Ogni pixel renderizzato con uno scopo. Ogni angolazione scelta per vendere.">Every pixel rendered with purpose. Every angle chosen to sell.</p>
+      </div>
+
+      <!-- PRODUCT IMAGES (6) -->
+      <div class="subsection-label reveal">
+        <span data-it="Render di Prodotto">Product Renders</span> <span data-it="06 immagini">06 images</span>
+      </div>
+      <div class="products-grid reveal">
+        <div class="product-card" onclick="openCarousel(bottleImages)">
+          <img src="Assets/3d%20Render/Bootle%20content/Mataroa-1.webp" alt="Mataroa Bottle">
+          <div class="product-hover">
+            <div class="product-hover-content">
+              <span class="product-hover-label">Mataroa Bottle</span>
+              <p class="product-hover-desc">Premium skincare bottle with elegant studio lighting and reflections. Professional product visualization for luxury ecommerce.</p>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" onclick="openCarousel(astronaveImages)">
+          <img src="Assets/3d%20Render/Astronave/Composizione%20Scena%20Ambientata.webp" alt="Astronave Project">
+          <div class="product-hover">
+            <div class="product-hover-content">
+              <span class="product-hover-label">Astronave Project</span>
+              <p class="product-hover-desc">Full CGI environment with spacecraft in detailed sci-fi setting. Complete 3D modeling, texturing and rendering from concept to final composition.</p>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" onclick="openCarousel(fancoilImages)">
+          <img src="Assets/3d%20Render/Fancoil/Copertina-Brucure-ONE.webp" alt="Fancoil ONE">
+          <div class="product-hover">
+            <div class="product-hover-content">
+              <span class="product-hover-label">Fancoil ONE</span>
+              <p class="product-hover-desc">HVAC fancoil unit with realistic material showcase. Multiple angles and technical views for B2B industrial product catalog.</p>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" onclick="openCarousel(farmaciaImages)">
+          <img src="Assets/Graphics/Farmacia%20Vincoli/Mokckup_vincoli_natale1.webp" alt="Farmacia Vincoli">
+          <div class="product-hover">
+            <div class="product-hover-content">
+              <span class="product-hover-label">Farmacia Vincoli</span>
+              <p class="product-hover-desc">Pharmacy branding with festive seasonal mockups. Complete visual identity showcasing product packaging and retail presentation.</p>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" onclick="openCarousel(geminiImages)">
+          <img src="Assets/3d%20Render/UFO/Ufo-50_Ambient.webp" alt="GEMINI System">
+          <div class="product-hover">
+            <div class="product-hover-content">
+              <span class="product-hover-label">GEMINI System</span>
+              <p class="product-hover-desc">Advanced HVAC system with detailed exploded views, cross-sections and environmental integration. Complete technical product visualization.</p>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" onclick="openCarousel(mockupImages)">
+          <img src="Assets/Graphics/Mockup%20e%20Immagini%20coordinate/1_Immagine_Mockups_accessibilita.webp" alt="Coordinated Branding">
+          <div class="product-hover">
+            <div class="product-hover-content">
+              <span class="product-hover-label">Branding & Mockups</span>
+              <p class="product-hover-desc">Complete brand identity system featuring custom logo design, coordinated imagery, and professional product mockups for cohesive visual presence.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CHAPTER 02 inline label -->
+      <div class="chapter-divider reveal" style="border-radius:var(--radius-lg); margin-top:var(--section-y); margin-bottom:3rem;">
+        <div class="chapter-num" style="font-size:clamp(3rem,8vw,6rem);">02</div>
+        <div class="chapter-label" style="font-size:clamp(1.2rem,3vw,2.5rem);" data-it="<strong>Animazione</strong>&amp; Video AI">
+          <strong>Animation</strong>
+          &amp; AI Video
+        </div>
+      </div>
+
+      <div class="section-header reveal">
+        <div class="section-eyebrow" data-it="Contenuti Animati">Motion Content</div>
+        <h2 class="section-title" data-it="Diamo vita<br>ai prodotti.">Bringing products<br>to life.</h2>
+        <p class="section-sub" data-it="Animazioni dinamiche e contenuti video di alta qualità progettati per fermare lo scroll e catturare il tuo pubblico.">Dynamic animations and high-quality video content designed to stop the scroll and captivate your audience.</p>
+      </div>
+
+      <!-- VIDEOS (4) -->
+      <div class="subsection-label reveal">
+        <span data-it="Video">Videos</span> <span data-it="04 clip">04 clips</span>
+      </div>
+      <div class="videos-grid reveal">
+        <div class="video-card">
+          <video autoplay loop muted playsinline>
+            <source src="Assets/3d%20Animations/GEMINI/GEMINI_VIDEO_1080P.mp4" type="video/mp4">
+          </video>
+          <div class="custom-controls">
+            <div class="video-timeline">
+              <div class="video-timeline-progress"></div>
+            </div>
+          </div>
+        </div>
+        <div class="video-card">
+          <video autoplay loop muted playsinline>
+            <source src="Assets/3d%20Animations/MATAROA/MATAROA%20Breve%20SH02-03.mp4" type="video/mp4">
+          </video>
+          <div class="custom-controls">
+            <div class="video-timeline">
+              <div class="video-timeline-progress"></div>
+            </div>
+          </div>
+        </div>
+        <div class="video-card">
+          <video autoplay loop muted playsinline>
+            <source src="Assets/3d%20Animations/ONE/VIDEO_ONE-M_1080P.mp4" type="video/mp4">
+          </video>
+          <div class="custom-controls">
+            <div class="video-timeline">
+              <div class="video-timeline-progress"></div>
+            </div>
+          </div>
+        </div>
+        <div class="video-card">
+          <video autoplay loop muted playsinline>
+            <source src="Assets/3d%20Animations/VMC/Video_ICON-U_1080P.mp4" type="video/mp4">
+          </video>
+          <div class="custom-controls">
+            <div class="video-timeline">
+              <div class="video-timeline-progress"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CHAPTER 03 inline label -->
+      <div class="chapter-divider reveal" style="border-radius:var(--radius-lg); margin-top:var(--section-y); margin-bottom:3rem;">
+        <div class="chapter-num" style="font-size:clamp(3rem,8vw,6rem);">03</div>
+        <div class="chapter-label" style="font-size:clamp(1.2rem,3vw,2.5rem);" data-it="<strong>Progetti</strong>CGI Completi">
+          <strong>Full CGI</strong>
+          Project
+        </div>
+      </div>
+
+      <div class="section-header reveal">
+        <div class="section-eyebrow" data-it="Ambienti">Environments</div>
+        <h2 class="section-title" data-it="Mondi creati<br>da zero.">Worlds built<br>from scratch.</h2>
+        <p class="section-sub" data-it="Ambienti completi, architetture, compositing e risorse pronte per l'utilizzo, a partire dai concept, progettate interamente in 3D.">Complete environments, architectures, compositing, and Game ready assets, starting from concepts, designed entirely in 3D </p>
+      </div>
+
+      <!-- GALLERY (4 images) -->
+      <div class="subsection-label reveal">
+        <span data-it="Galleria">Gallery</span> <span data-it="04 immagini">04 images</span>
+      </div>
+      <div class="gallery-grid reveal">
+        <div class="gallery-card">
+          <img src="Assets/3d%20Render/Astronave/Composizione%20Scena%20Ambientata.webp" alt="Astronave Render">
+        </div>
+        <div class="gallery-card">
+          <img src="Assets/3d%20Render/Templio/JAPAN-TEMPLE.webp" alt="Japan Temple">
+        </div>
+        <div class="gallery-card">
+          <img src="Assets/3d%20Render/Corridoio%20Combattimento/Sfondo-corridio_15.webp" alt="Corridoio">
+        </div>
+        <div class="gallery-card">
+          <img src="Assets/3d%20Render/Scene%20Ambienti%20Vari/render-casa-def-senza-errori-def.webp" alt="Render Casa">
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ░░ CHAPTER 04 ░░ -->
+  <div class="chapter-divider">
+    <div class="chapter-num">04</div>
+    <div class="chapter-label" data-it="<strong>Come</strong>Funziona">
+      <strong>How It</strong>
+      Works
+    </div>
+  </div>
+
+  <!-- ░░ HOW IT WORKS ░░ -->
+  <section id="process" class="section-pad">
+    <div class="process-grid">
+
+      <!-- Left Side: Visuals -->
+      <div class="process-media reveal">
+        
+        <div class="showcase-wrap">
+          <div class="showcase-card">
+            <div class="showcase-image-container">
+              
+              <!-- Background Image (Finish) -->
+              <img src="Assets/3d%20Render/Astronave/Composizione%20Scena%20Ambientata.webp" alt="Final Render Finish">
+              
+              <!-- Foreground Masked Image (Start/Clay) -->
+              <div class="image-before">
+                <img src="Assets/3d%20Render/Astronave/Composizione%20Scena%20Ambientata-clay.webp" alt="Clay Render Start">
+              </div>
+
+              <!-- Slider Handle UI -->
+              <div class="slider-handle">
+                <div class="slider-button">
+                  <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 18l4-6-4-6M9 6l-4 6 4 6"/></svg>
+                </div>
+              </div>
+
+              <!-- Invisible Range Input for Dragging -->
+              <input type="range" min="0" max="100" value="50" class="slider-input" 
+                     oninput="this.parentNode.style.setProperty('--position', this.value + '%')">
+              
+              <!-- Floating Tags -->
+              <div class="showcase-tags">
+                <span class="showcase-tag" data-it="Inizio">Start</span>
+                <span class="showcase-tag finish" data-it="Fine">Finish</span>
+              </div>
+            </div>
+          </div>
+          <div class="showcase-caption" data-it="Scorri per confrontare: Modello 3D vs Render Finale">Slide to compare: 3D Modeling vs Final Render</div>
+        </div>
+
+        <!-- Second Slider (Corridor) -->
+        <div class="showcase-wrap">
+          <div class="showcase-card">
+            <div class="showcase-image-container">
+              
+              <!-- Background Image (Finish) -->
+              <img src="Assets/3d%20Render/Bootle%20content/Mataroa-MatCap-Rendered.webp" alt="Mataroa Final Render">
+              
+              <!-- Foreground Masked Image (Start/Clay) -->
+              <div class="image-before">
+                <img src="Assets/3d%20Render/Bootle%20content/Mataroa%20MatCap.webp" alt="Mataroa MatCap Start">
+              </div>
+
+              <!-- Slider Handle UI -->
+              <div class="slider-handle">
+                <div class="slider-button">
+                  <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 18l4-6-4-6M9 6l-4 6 4 6"/></svg>
+                </div>
+              </div>
+
+              <!-- Invisible Range Input for Dragging -->
+              <input type="range" min="0" max="100" value="50" class="slider-input" 
+                     oninput="this.parentNode.style.setProperty('--position', this.value + '%')">
+              
+              <!-- Floating Tags -->
+              <div class="showcase-tags">
+                <span class="showcase-tag" data-it="Inizio">Start</span>
+                <span class="showcase-tag finish" data-it="Fine">Finish</span>
+              </div>
+            </div>
+          </div>
+          <div class="showcase-caption" data-it="Scorri per confrontare: MatCap vs Render Finale">Slide to compare: MatCap vs Final Render</div>
+        </div>
+
+      </div>
+
+      <!-- Right Side: Timeline Steps -->
+      <div class="process-steps reveal reveal-delay-1">
+        <div class="section-eyebrow" data-it="Processo">Process</div>
+        <h2 class="process-title" data-it="Come<br><em>funziona.</em>">How it<br><em>works.</em></h2>
+        <p class="process-subtitle" data-it="Dal tuo primo messaggio al render finito — ecco il percorso.">From your first message to a finished render — here's the journey.</p>
+        
+        <div class="timeline">
+          <div class="timeline-step">
+            <div class="step-circle">01</div>
+            <div class="step-content">
+              <div class="step-tag tag tag-terra" data-it="Scoperta">Discovery</div>
+              <h4 data-it="Call di Scoperta">Discovery Call</h4>
+              <p data-it="Parliamo del tuo prodotto, del tuo brand e di cosa hai bisogno. Niente gergo tecnico — solo chiarezza su cosa stiamo costruendo e perché.">We talk about your product, your brand, and what you need. No jargon — just clarity on what we're building and why.</p>
+            </div>
+          </div>
+          
+          <div class="timeline-step">
+            <div class="step-circle">02</div>
+            <div class="step-content">
+              <div class="step-tag tag tag-gold" data-it="Creazione">Creation</div>
+              <h4 data-it="Creazione del Visual">Creating the Visual</h4>
+              <p data-it="Modello, applico texture, illumino e renderizzo il tuo prodotto. Ogni angolo scelto per vendere. Prima bozza consegnata in 48 ore.">I model, texture, light, and render your product. Every angle chosen to sell. First draft delivered in 48 hours.</p>
+            </div>
+          </div>
+          
+          <div class="timeline-step">
+            <div class="step-circle">03</div>
+            <div class="step-content">
+              <div class="step-tag tag tag-lavender" data-it="Consegna">Delivery</div>
+              <h4 data-it="Consegna">Delivery</h4>
+              <p data-it="Ricevi i tuoi asset 3D di alta qualità — file di render, esportazioni video e tutto pronto da caricare e utilizzare.">You receive your high-quality 3D assets — render files, video exports, and everything ready to upload and use.</p>
+            </div>
+          </div>
+          
+          <div class="timeline-step">
+            <div class="step-circle">04</div>
+            <div class="step-content">
+              <div class="step-tag tag tag-gold" data-it="Revisione">Revision</div>
+              <h4 data-it="Revisione">Revision</h4>
+              <p data-it="Perfezionamento finché non è esattamente come lo vuoi. Giri illimitati finché non sei felice al 100% — senza costi aggiuntivi.">Fine-tuning until it's exactly right. Unlimited rounds until you're 100% happy — no extra charge.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ░░ CHAPTER 05 ░░ -->
+  <div class="chapter-divider">
+    <div class="chapter-num">05</div>
+    <div class="chapter-label" data-it="<strong>Riguardo</strong>lo Studio">
+      <strong>About</strong>
+      the Studio
+    </div>
+  </div>
+
+  <!-- ░░ ABOUT ░░ -->
+  <section id="about" class="section-pad">
+    <div class="about-grid">
+
+      <!-- Photo -->
+      <div class="about-photo-wrap reveal">
+        <div class="about-photo-frame">
+          <img src="Assets/Chi%20sono.webp" alt="Lorenzo Cordioli">
+        </div>
+        <div class="about-contact-card">
+          <div class="contact-card-name">Lorenzo Cordioli</div>
+          <div class="contact-card-line">
+            <span class="dot"></span>
+            lorenzocordioli02@gmail.com
+          </div>
+          <div class="contact-card-line">
+            <span class="dot"></span>
+            +39 373 77 53 117
+          </div>
+        </div>
+      </div>
+
+      <!-- Text -->
+      <div class="about-text reveal reveal-delay-1">
+        <div class="section-eyebrow" data-it="La persona dietro ai render">The Person Behind the Renders</div>
+        <h2 class="section-title" data-it="Costruito per brand<br>che vogliono vincere.">Built for brands<br>that want to win.</h2>
+
+        <p data-it="<strong>Il tuo prodotto merita visual migliori.</strong> La maggior parte dei brand ecommerce perde vendite perché le foto dei loro prodotti sembrano economiche o generiche. Noi risolviamo questo problema con il 3D — niente campioni fisici, niente studio fotografico, nessuna attesa di settimane.">
+          <strong>Your product deserves better visuals.</strong> Most ecommerce brands lose sales because their product photos look cheap or generic. We fix that with 3D — no samples, no studio, no waiting weeks.
+        </p>
+        <p data-it="Sono Lorenzo, un artista 3D specializzato in visualizzazione di prodotto, animazione e video AI per brand ecommerce. Il mio obiettivo è semplice: far sembrare il tuo prodotto <strong>così bello che i clienti si fidano prima ancora di cliccare.</strong>">
+          I'm Lorenzo, a 3D artist specialising in product visualisation, animation, and AI video for ecommerce brands. My goal is simple: make your product look <strong>so good that customers trust it before they click.</strong>
+        </p>
+        <p data-it="Consegne rapide. Revisioni finché non è esattamente perfetto. E visual che corrispondono a ciò che il tuo cliente <em>prova</em> quando acquista.">
+          Fast turnaround. Revisions until it's exactly right. And visuals that match what your customer <em>feels</em> when they buy.
+        </p>
+
+        <div class="about-services">
+          <div class="about-service-item">
+            <div class="about-service-label" data-it="Visualizzazione Prodotto">Product Visualization</div>
+            <div class="about-service-desc" data-it="Render statici per pagine prodotto, ads &amp; cataloghi.">Still renders for product pages, ads &amp; catalogues.</div>
+          </div>
+          <div class="about-service-item">
+            <div class="about-service-label" data-it="Animazione Prodotto">Product Animation</div>
+            <div class="about-service-desc" data-it="Rotazioni a 360°, animazioni hero &amp; video di reveal.">360° spins, hero animations &amp; reveal videos.</div>
+          </div>
+          <div class="about-service-item">
+            <div class="about-service-label" data-it="Video AI">AI Video</div>
+            <div class="about-service-desc" data-it="Contenuti video generati con AI per social &amp; paid ads.">AI-generated video content for social &amp; paid ads.</div>
+          </div>
+          <div class="about-service-item">
+            <div class="about-service-label" data-it="Creatività Ecommerce">Ecommerce Creative</div>
+            <div class="about-service-desc" data-it="Pacchetti creativi completi per brand DTC.">Full creative packages for DTC brands.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ░░ CONTACT SECTION ─── -->
+  <section id="contact" class="contact-section">
+
+    <!-- Left — Heading + contact info -->
+    <div class="contact-left reveal">
+
+      <div class="section-eyebrow" data-it="Contatti">Contact</div>
+
+      <h2 class="contact-title" data-it="Creiamo<br>qualcosa di<br><em>grande.</em>">
+        Let's make<br>
+        something<br>
+        <em>great.</em>
+      </h2>
+
+      <p class="contact-sub" data-it="Hai un progetto in mente? Parlami del tuo brand e del tuo prodotto — ti risponderò entro 24 ore.">
+        Have a project in mind? Tell me about your brand and product —
+        I'll get back to you within 24 hours.
+      </p>
+
+      <div class="contact-details">
+        <div class="contact-detail-item">
+          <span class="contact-detail-label">Email</span>
+          <a href="mailto:lorenzocordioli02@gmail.com" class="contact-detail-value">
+            lorenzocordioli02@gmail.com
+          </a>
+        </div>
+        <div class="contact-detail-item">
+          <span class="contact-detail-label" data-it="Telefono">Phone</span>
+          <a href="tel:+393737753117" class="contact-detail-value">
+            +39 373 77 53 117
+          </a>
+        </div>
+        <div class="contact-detail-item">
+          <span class="contact-detail-label" data-it="Con sede in">Based in</span>
+          <span class="contact-detail-value" data-it="Italia 🇮🇹 — Remoto in tutto il mondo">Italy 🇮🇹 — Remote Worldwide</span>
+        </div>
+      </div>
+
+      <!-- Three-dot brand accent -->
+      <div class="contact-accent-bar">
+        <span class="contact-accent-dot" style="background: var(--terra);"></span>
+        <span class="contact-accent-dot" style="background: var(--gold);"></span>
+        <span class="contact-accent-dot" style="background: var(--lavender);"></span>
+      </div>
+
+    </div>
+
+    <!-- Right — Form card -->
+    <div class="contact-right reveal reveal-delay-1">
+
+      <form class="contact-form" id="contactForm" onsubmit="handleContactSubmit(event)">
+
+        <!-- 01 Name -->
+        <div class="cf-field" id="field-name">
+          <label class="cf-label" for="name">
+            <span class="cf-label-num">01</span> <span data-it="Il Tuo Nome">Your Name</span>
+          </label>
+          <div class="cf-input-wrap">
+            <input
+              class="cf-input"
+              type="text"
+              id="name"
+              name="name"
+              placeholder="e.g. John Doe"
+              autocomplete="name"
+              required
+            />
+            <div class="cf-input-line"></div>
+          </div>
+        </div>
+
+        <!-- 02 Email -->
+        <div class="cf-field" id="field-email">
+          <label class="cf-label" for="email">
+            <span class="cf-label-num">02</span> <span data-it="La Tua Email">Your Email</span>
+          </label>
+          <div class="cf-input-wrap">
+            <input
+              class="cf-input"
+              type="email"
+              id="email"
+              name="email"
+              placeholder="hello@yourbrand.com"
+              autocomplete="email"
+              required
+            />
+            <div class="cf-input-line"></div>
+          </div>
+        </div>
+
+        <!-- 03 Message -->
+        <div class="cf-field" id="field-message">
+          <label class="cf-label" for="message">
+            <span class="cf-label-num">03</span> <span data-it="Il Tuo Messaggio">Your Message</span>
+          </label>
+          <div class="cf-input-wrap">
+            <textarea
+              class="cf-input cf-textarea"
+              id="message"
+              name="message"
+              placeholder="Tell me about your product, what you need, and when…"
+              rows="5"
+              required
+            ></textarea>
+            <div class="cf-input-line"></div>
+          </div>
+        </div>
+
+        <!-- Submit row -->
+        <div class="cf-footer">
+          <button class="cf-submit" type="submit" id="cfSubmitBtn">
+            <span class="cf-submit-text" data-it="Invia Messaggio">Send Message</span>
+            <span class="cf-submit-icon">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M5 12h14M13 6l6 6-6 6"/>
+              </svg>
+            </span>
+          </button>
+          <p class="cf-note" data-it="Rispondo entro 24 ore.">I reply within 24 hours.</p>
+        </div>
+
+        <!-- Success / error feedback -->
+        <div class="cf-feedback" id="cfFeedback" aria-live="polite"></div>
+
+      </form>
+    </div>
+
+  </section>
+
+  <!-- ░░ CTA ░░ -->
+  <section id="cta">
+    <div class="cta-inner">
+      <div class="section-eyebrow" data-it="Pronto per Iniziare?">Ready to Start?</div>
+      <h2 class="cta-title reveal" data-it="Rendiamo il tuo<br>prodotto <span class='accent-gold'>impossibile</span><br><em>da</em> <span class='accent-terra'>ignorare.</span>">
+        Let's make your<br>
+        product <span class="accent-gold">impossible</span><br>
+        <em>to</em> <span class="accent-terra">ignore.</span>
+      </h2>
+      <p class="cta-sub reveal reveal-delay-1" data-it="Parlami del tuo brand. Ti mostrerò cosa possiamo realizzare — nessun impegno, nessun costo.">
+        Tell me about your brand. I'll show you what it could look like — no commitment, no cost.
+      </p>
+      <div class="cta-btns reveal reveal-delay-2">
+        <a href="mailto:lorenzocordioli02@gmail.com" class="btn-fill-light" data-it="Richiedi un Preventivo">Get a Free Quote</a>
+        <a href="#portfolio" class="btn-outline-light" data-it="Vedi Altri Lavori">View More Work</a>
+      </div>
+      <div class="cta-contact-strip reveal reveal-delay-3">
+        <div class="cta-contact-item">
+          <span class="cta-contact-label">Email</span>
+          <a href="mailto:lorenzocordioli02@gmail.com" class="cta-contact-value">lorenzocordioli02@gmail.com</a>
+        </div>
+        <div class="cta-contact-item">
+          <span class="cta-contact-label" data-it="Telefono">Phone</span>
+          <a href="tel:+393737753117" class="cta-contact-value">+39 373 77 53 117</a>
+        </div>
+        <div class="cta-contact-item">
+          <span class="cta-contact-label" data-it="Con sede in">Based in</span>
+          <span class="cta-contact-value" style="cursor:default;" data-it="Italia 🇮🇹">Italy 🇮🇹</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ FOOTER ░░ -->
+  <footer>
+    <div class="footer-logo">
+      <div class="dot-small"></div>
+      SIDE 3D STUDIO
+    </div>
+    <p data-it="© 2025 Side 3D Studio — Lorenzo Cordioli. Tutti i diritti riservati.">© 2025 Side 3D Studio — Lorenzo Cordioli. All rights reserved.</p>
+    <ul class="footer-links">
+      <li><a href="#portfolio" data-it="Lavori">Work</a></li>
+      <li><a href="#about" data-it="Chi Sono">About</a></li>
+      <li><a href="#contact" data-it="Contatti">Contact</a></li>
+    </ul>
+  </footer>
+
+  <!-- ░░ CAROUSEL MODAL ░░ -->
+  <div id="carousel-modal">
+    <button class="carousel-close" onclick="closeCarousel()">&times;</button>
+    <button class="carousel-btn carousel-prev" onclick="changeSlide(-1)">
+      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+    </button>
+    <div class="carousel-content">
+      <img id="carousel-img" src="" alt="Fancoil Slide">
+    </div>
+    <button class="carousel-btn carousel-next" onclick="changeSlide(1)">
+      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+
+  <!-- ░░ SCRIPT ░░ -->
+  <script>
+    // Custom Video Timeline Controls
+    document.querySelectorAll('.video-card').forEach(card => {
+      const video = card.querySelector('video');
+      const timelineProgress = card.querySelector('.video-timeline-progress');
+      const customControls = card.querySelector('.custom-controls');
+
+      if (video && customControls && timelineProgress) {
+        // Update progress bar as video plays
+        video.addEventListener('timeupdate', () => {
+          if (!video.duration) return;
+          const percentage = (video.currentTime / video.duration) * 100;
+          timelineProgress.style.width = percentage + '%';
+        });
+
+        // Scrub video on click
+        customControls.addEventListener('click', (e) => {
+          const rect = customControls.getBoundingClientRect();
+          const clickX = e.clientX - rect.left;
+          const clickPercentage = clickX / rect.width;
+          video.currentTime = clickPercentage * video.duration;
+        });
+      }
+    });
+
+    // Language Switcher Logic
+    let currentLang = 'en';
+    function setLang(lang) {
+      if (lang === currentLang) return;
+      
+      // Update active button classes
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+      
+      // Translate all elements with data-it attribute
+      document.querySelectorAll('[data-it]').forEach(el => {
+        // Save the original English HTML the first time
+        if (!el.hasAttribute('data-en')) {
+          el.setAttribute('data-en', el.innerHTML);
+        }
+        // Swap content
+        el.innerHTML = lang === 'it' ? el.getAttribute('data-it') : el.getAttribute('data-en');
+      });
+      
+      currentLang = lang;
+    }
+
+    // Scroll Reveal Logic
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      }),
+      { threshold: 0.10 }
+    );
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // Carousel Logic
+    const bottleImages = [
+      "Assets/3d%20Render/Bootle%20content/Mataroa-1.webp",
+      "Assets/3d%20Render/Bootle%20content/Mataroa-2.webp",
+      "Assets/3d%20Render/Bootle%20content/Mataroa-Caduta-Goccia.webp",
+      "Assets/3d%20Render/Bootle%20content/Image%20Sea-2.webp"
+    ];
+
+    const astronaveImages = [
+      "Assets/3d%20Render/Astronave/Composizione%20Scena%20Ambientata.webp",
+      "Assets/3d%20Render/Astronave/Composizione%20Scena%20Ambientata-clay.webp",
+      "Assets/3d%20Render/Astronave/Astronave%20Render.webp",
+      "Assets/3d%20Render/Astronave/Astronave%20textured.webp",
+      "Assets/3d%20Render/Astronave/Astronave%20textured%202.webp",
+      "Assets/3d%20Render/Astronave/Mesh%20Astronave%201.webp",
+      "Assets/3d%20Render/Astronave/Mesh%20astronave%202.webp"
+    ];
+
+    const fancoilImages = [
+      "Assets/3d%20Render/Fancoil/Copertina-Brucure-ONE.webp",
+      "Assets/3d%20Render/Fancoil/Copertina-Brucure-ONE-2.webp",
+      "Assets/3d%20Render/Fancoil/Copertina-Brucure-ONE-3.webp",
+      "Assets/3d%20Render/Fancoil/Copertina-Brucure-ONE-4.webp",
+      "Assets/3d%20Render/Fancoil/Copertina-Brucure-ONE-5.webp",
+      "Assets/3d%20Render/Fancoil/Copertina-Brucure-ONE-6.webp",
+      "Assets/3d%20Render/Fancoil/Copertina-Brucure-ONE-7.webp"
+    ];
+
+    const farmaciaImages = [
+      "Assets/Graphics/Farmacia%20Vincoli/Mokckup_vincoli_natale1.webp",
+      "Assets/Graphics/Farmacia%20Vincoli/Mokckup_vincoli_natale2.webp",
+      "Assets/Graphics/Farmacia%20Vincoli/Mokckup_vincoli_natale3.webp"
+    ];
+
+    const geminiImages = [
+      "Assets/3d%20Render/UFO/Ufo-50_Ambient.webp",
+      "Assets/3d%20Render/UFO/Ufo-50_Griglia.webp",
+      "Assets/3d%20Render/UFO/Ufo-50_tubi.webp",
+      "Assets/3d%20Render/GEMINI/1_Esploso_Gemini.webp",
+      "Assets/3d%20Render/GEMINI/2_Sezionato%20_Gemini.webp",
+      "Assets/3d%20Render/GEMINI/3_Ventola_Gemini.webp",
+      "Assets/3d%20Render/GEMINI/5_Ambiente_Gemini.webp",
+      "Assets/3d%20Render/GEMINI/4_immagine%20esploso.webp"
+    ];
+
+    const mockupImages = [
+      "Assets/Graphics/Mockup%20e%20Immagini%20coordinate/1_Immagine_Mockups_accessibilita.webp",
+      "Assets/Graphics/Mockup%20e%20Immagini%20coordinate/Biglietto%20da%20visita%20Magic%20DUO.webp",
+      "Assets/Graphics/Mockup%20e%20Immagini%20coordinate/Biglietto%20spettacolo%20Magic%20DUO.webp",
+      "Assets/Graphics/Mockup%20e%20Immagini%20coordinate/Immagine_Azienda_Pedane-Radianti.webp",
+      "Assets/Graphics/Mockup%20e%20Immagini%20coordinate/Immagine_Biglietto-da-visita_Pedane-Radianti.webp"
+    ];
+
+    let currentSlide = 0;
+    let currentGallery = [];
+    const carouselModal = document.getElementById('carousel-modal');
+    const carouselImg = document.getElementById('carousel-img');
+
+    function openCarousel(galleryArray) {
+      currentGallery = galleryArray;
+      currentSlide = 0;
+      carouselImg.src = currentGallery[currentSlide];
+      carouselModal.classList.add('active');
+      document.body.style.overflow = 'hidden'; // Stop background scrolling
+    }
+    
+    function closeCarousel() {
+      carouselModal.classList.remove('active');
+      document.body.style.overflow = ''; // Restore background scrolling
+    }
+
+    function changeSlide(direction) {
+      currentSlide += direction;
+      // Loop around if reaching the end or beginning
+      if (currentSlide < 0) currentSlide = currentGallery.length - 1;
+      if (currentSlide >= currentGallery.length) currentSlide = 0;
+      carouselImg.src = currentGallery[currentSlide];
+    }
+    
+    // Close modal when clicking outside the image
+    carouselModal.addEventListener('click', (e) => {
+      if (e.target === carouselModal) closeCarousel();
+    });
+
+    /* ── Contact form submit ──────────────────────────────────────────
+       HOW TO CONNECT:
+       1. Go to https://formspree.io and create a free account
+       2. Create a new form — copy the endpoint, e.g.:
+          https://formspree.io/f/xabc1234
+       3. Replace YOUR_FORM_ID below with your actual ID
+    ─────────────────────────────────────────────────────────────── */
+    function handleContactSubmit(e) {
+      e.preventDefault();
+
+      const form     = document.getElementById('contactForm');
+      const btn      = document.getElementById('cfSubmitBtn');
+      const feedback = document.getElementById('cfFeedback');
+      const name     = document.getElementById('name');
+      const email    = document.getElementById('email');
+      const message  = document.getElementById('message');
+
+      /* Reset previous states */
+      feedback.className   = 'cf-feedback';
+      feedback.textContent = '';
+      document.querySelectorAll('.cf-field').forEach((f) => f.classList.remove('invalid'));
+
+      /* Validate */
+      let valid = true;
+      if (!name.value.trim()) {
+        document.getElementById('field-name').classList.add('invalid');
+        valid = false;
+      }
+      if (!email.value || !email.value.includes('@')) {
+        document.getElementById('field-email').classList.add('invalid');
+        valid = false;
+      }
+      if (!message.value.trim()) {
+        document.getElementById('field-message').classList.add('invalid');
+        valid = false;
+      }
+      if (!valid) {
+        feedback.textContent = 'Please fill in the required fields.';
+        feedback.classList.add('error');
+        return;
+      }
+
+      /* Loading state */
+      btn.disabled = true;
+      btn.querySelector('.cf-submit-text').textContent = 'Sending…';
+
+      /* Send to Formspree */
+      fetch('https://formspree.io/f/xqeozrrv', {
+        method:  'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept':       'application/json',
+        },
+        body: JSON.stringify({
+          name:    name.value,
+          email:   email.value,
+          message: message.value,
+        }),
+      })
+        .then((res) => {
+          if (res.ok) {
+            feedback.textContent = "✓ Message sent — I'll be in touch within 24 hours.";
+            feedback.classList.add('success');
+            form.reset();
+          } else {
+            throw new Error('Server error');
+          }
+        })
+        .catch(() => {
+          feedback.textContent = 'Something went wrong. Email me directly at lorenzocordioli02@gmail.com';
+          feedback.classList.add('error');
+        })
+        .finally(() => {
+          btn.disabled = false;
+          btn.querySelector('.cf-submit-text').textContent = 'Send Message';
+        });
+    }
+
+  </script>
+
+</body>
+</html>
