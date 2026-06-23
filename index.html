@@ -617,6 +617,54 @@
     .video-card:nth-child(2) {
       grid-column: span 2;
     }
+
+    /* Custom Play Button Overlay */
+    .play-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.2);
+      transition: opacity 0.3s ease, background 0.3s ease;
+      cursor: pointer;
+    }
+    .video-card.playing .play-overlay {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .video-card:hover .play-overlay:not(.playing) {
+      background: rgba(0, 0, 0, 0.4);
+    }
+    .play-btn-circle {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: transform 0.3s ease, background 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    .play-btn-circle::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 10px 0 10px 16px;
+      border-color: transparent transparent transparent #111;
+      margin-left: 5px;
+    }
+    .video-card:hover .play-btn-circle {
+      transform: scale(1.1);
+      background: #fff;
+    }
+
     .custom-controls {
       position: absolute;
       bottom: 0;
@@ -1527,43 +1575,35 @@
       </div>
       <div class="videos-grid reveal">
         <div class="video-card">
-          <video autoplay loop muted playsinline>
+          <video loop muted playsinline preload="metadata" poster="Assets/3d%20Animations/GEMINI/Copertina_Gemini.webp">
             <source src="Assets/3d%20Animations/GEMINI/GEMINI_VIDEO_1080P.mp4" type="video/mp4">
           </video>
-          <div class="custom-controls">
-            <div class="video-timeline">
-              <div class="video-timeline-progress"></div>
-            </div>
+          <div class="play-overlay">
+            <div class="play-btn-circle"></div>
           </div>
         </div>
         <div class="video-card">
-          <video autoplay loop muted playsinline>
+          <video loop muted playsinline preload="metadata" poster="Assets/3d%20Animations/MATAROA/Copertina_MATAROA.webp">
             <source src="Assets/3d%20Animations/MATAROA/MATAROA%20Breve%20SH02-03.mp4" type="video/mp4">
           </video>
-          <div class="custom-controls">
-            <div class="video-timeline">
-              <div class="video-timeline-progress"></div>
-            </div>
+          <div class="play-overlay">
+            <div class="play-btn-circle"></div>
           </div>
         </div>
         <div class="video-card">
-          <video autoplay loop muted playsinline>
+          <video loop muted playsinline preload="metadata" poster="Assets/3d%20Animations/ONE/Coeprtina_ONE.webp">
             <source src="Assets/3d%20Animations/ONE/VIDEO_ONE-M_1080P.mp4" type="video/mp4">
           </video>
-          <div class="custom-controls">
-            <div class="video-timeline">
-              <div class="video-timeline-progress"></div>
-            </div>
+          <div class="play-overlay">
+            <div class="play-btn-circle"></div>
           </div>
         </div>
         <div class="video-card">
-          <video autoplay loop muted playsinline>
+          <video loop muted playsinline preload="metadata" poster="Assets/3d%20Animations/VMC/Copertina_ICON.webp">
             <source src="Assets/3d%20Animations/VMC/Video_ICON-U_1080P.mp4" type="video/mp4">
           </video>
-          <div class="custom-controls">
-            <div class="video-timeline">
-              <div class="video-timeline-progress"></div>
-            </div>
+          <div class="play-overlay">
+            <div class="play-btn-circle"></div>
           </div>
         </div>
       </div>
@@ -1999,26 +2039,31 @@
 
   <!-- ░░ SCRIPT ░░ -->
   <script>
-    // Custom Video Timeline Controls
+    // Custom Video Click-to-Play Logic
     document.querySelectorAll('.video-card').forEach(card => {
       const video = card.querySelector('video');
-      const timelineProgress = card.querySelector('.video-timeline-progress');
-      const customControls = card.querySelector('.custom-controls');
+      const overlay = card.querySelector('.play-overlay');
 
-      if (video && customControls && timelineProgress) {
-        // Update progress bar as video plays
-        video.addEventListener('timeupdate', () => {
-          if (!video.duration) return;
-          const percentage = (video.currentTime / video.duration) * 100;
-          timelineProgress.style.width = percentage + '%';
+      if (video && overlay) {
+        // Togli i controlli nativi per usare solo la nostra UI
+        video.removeAttribute('controls');
+        
+        // Quando clicchi sulla copertina, fa partire il video
+        overlay.addEventListener('click', () => {
+          video.play();
+          card.classList.add('playing');
+          video.setAttribute('controls', 'controls'); // Mostra i controlli una volta partito
         });
 
-        // Scrub video on click
-        customControls.addEventListener('click', (e) => {
-          const rect = customControls.getBoundingClientRect();
-          const clickX = e.clientX - rect.left;
-          const clickPercentage = clickX / rect.width;
-          video.currentTime = clickPercentage * video.duration;
+        // Se metti in pausa dai controlli, mostra di nuovo l'overlay
+        video.addEventListener('pause', () => {
+          card.classList.remove('playing');
+          video.removeAttribute('controls'); // Nasconde i controlli in pausa
+        });
+        
+        video.addEventListener('play', () => {
+          card.classList.add('playing');
+          video.setAttribute('controls', 'controls');
         });
       }
     });
