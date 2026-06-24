@@ -620,6 +620,7 @@
 
     /* Custom Play Button Overlay */
     .play-overlay {
+      z-index: 2;
       position: absolute;
       top: 0;
       left: 0;
@@ -1575,7 +1576,7 @@
       </div>
       <div class="videos-grid reveal">
         <div class="video-card">
-          <video loop muted playsinline preload="metadata" poster="Assets/3d%20Animations/GEMINI/Copertina_Gemini.webp">
+          <video loop muted playsinline preload="none" poster="Assets/3d%20Animations/GEMINI/Copertina_Gemini.webp" controls>
             <source src="Assets/3d%20Animations/GEMINI/GEMINI_VIDEO_1080P.mp4" type="video/mp4">
           </video>
           <div class="play-overlay">
@@ -1583,7 +1584,7 @@
           </div>
         </div>
         <div class="video-card">
-          <video loop muted playsinline preload="metadata" poster="Assets/3d%20Animations/MATAROA/Copertina_MATAROA.webp">
+          <video loop muted playsinline preload="none" poster="Assets/3d%20Animations/MATAROA/Copertina_MATAROA.webp" controls>
             <source src="Assets/3d%20Animations/MATAROA/MATAROA%20Breve%20SH02-03.mp4" type="video/mp4">
           </video>
           <div class="play-overlay">
@@ -1591,7 +1592,7 @@
           </div>
         </div>
         <div class="video-card">
-          <video loop muted playsinline preload="metadata" poster="Assets/3d%20Animations/ONE/Coeprtina_ONE.webp">
+          <video loop muted playsinline preload="none" poster="Assets/3d%20Animations/ONE/Coeprtina_ONE.webp" controls>
             <source src="Assets/3d%20Animations/ONE/VIDEO_ONE-M_1080P.mp4" type="video/mp4">
           </video>
           <div class="play-overlay">
@@ -1599,7 +1600,7 @@
           </div>
         </div>
         <div class="video-card">
-          <video loop muted playsinline preload="metadata" poster="Assets/3d%20Animations/VMC/Copertina_ICON.webp">
+          <video loop muted playsinline preload="none" poster="Assets/3d%20Animations/VMC/Copertina_ICON.webp" controls>
             <source src="Assets/3d%20Animations/VMC/Video_ICON-U_1080P.mp4" type="video/mp4">
           </video>
           <div class="play-overlay">
@@ -2039,31 +2040,31 @@
 
   <!-- ░░ SCRIPT ░░ -->
   <script>
-    // Custom Video Click-to-Play Logic
+    // Custom Video Click-to-Play Logic (Robust Fallback per GitHub Pages)
     document.querySelectorAll('.video-card').forEach(card => {
       const video = card.querySelector('video');
       const overlay = card.querySelector('.play-overlay');
 
       if (video && overlay) {
-        // Togli i controlli nativi per usare solo la nostra UI
-        video.removeAttribute('controls');
-        
-        // Quando clicchi sulla copertina, fa partire il video
-        overlay.addEventListener('click', () => {
-          video.play();
+        // Quando clicchi sulla copertina elegante
+        overlay.addEventListener('click', async () => {
+          // Nascondi subito l'overlay
           card.classList.add('playing');
-          video.setAttribute('controls', 'controls'); // Mostra i controlli una volta partito
+          
+          try {
+            // Tenta di far partire il video
+            await video.play();
+          } catch (err) {
+            // Se il browser o GitHub bloccano il play() via Javascript
+            // per via del peso, l'overlay è comunque sparito 
+            // e l'utente può premere il tasto Play nativo che è rimasto sotto.
+            console.warn('Play via Javascript bloccato, uso controlli nativi.', err);
+          }
         });
 
-        // Se metti in pausa dai controlli, mostra di nuovo l'overlay
+        // Se l'utente mette in pausa dal tasto nativo, rimettiamo l'overlay elegante
         video.addEventListener('pause', () => {
           card.classList.remove('playing');
-          video.removeAttribute('controls'); // Nasconde i controlli in pausa
-        });
-        
-        video.addEventListener('play', () => {
-          card.classList.add('playing');
-          video.setAttribute('controls', 'controls');
         });
       }
     });
