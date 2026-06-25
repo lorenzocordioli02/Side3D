@@ -729,7 +729,7 @@
       font-family: var(--mono);
       font-size: 0.68rem;
       letter-spacing: 0.1em;
-      text-Ftransform: uppercase;
+      text-transform: uppercase;
       color: rgba(245,243,239,0.3);
     }
 
@@ -1576,7 +1576,7 @@
       </div>
       <div class="videos-grid reveal">
         <div class="video-card">
-          <video loop muted playsinline preload="none" poster="Assets/3d%20Animations/GEMINI/Copertina_Gemini.webp" controls>
+          <video loop muted playsinline preload="metadata" poster="Assets/3d%20Animations/GEMINI/Copertina_Gemini.webp" controls>
             <source src="Assets/3d%20Animations/GEMINI/GEMINI_VIDEO_1080P.mp4" type="video/mp4">
           </video>
           <div class="play-overlay">
@@ -1584,15 +1584,15 @@
           </div>
         </div>
         <div class="video-card">
-          <video loop muted playsinline preload="none" poster="Assets/3d%20Animations/MATAROA/Copertina_MATAROA.webp" controls>
-            <source src="Assets/3d%20Animations/MATAROA/MATAROA%20Breve%20SH02-03.mp4" type="video/mp4">
+          <video loop muted playsinline preload="metadata" poster="Assets/3d%20Animations/MATAROA/Copertina_MATAROA.webp" controls>
+            <source src="Assets/3d%20Animations/MATAROA/MATAROA%20FINAL_V1.mp4" type="video/mp4">
           </video>
           <div class="play-overlay">
             <div class="play-btn-circle"></div>
           </div>
         </div>
         <div class="video-card">
-          <video loop muted playsinline preload="none" poster="Assets/3d%20Animations/ONE/Coeprtina_ONE.webp" controls>
+          <video loop muted playsinline preload="metadata" poster="Assets/3d%20Animations/ONE/Coeprtina_ONE.webp" controls>
             <source src="Assets/3d%20Animations/ONE/VIDEO_ONE-M_1080P.mp4" type="video/mp4">
           </video>
           <div class="play-overlay">
@@ -1600,7 +1600,7 @@
           </div>
         </div>
         <div class="video-card">
-          <video loop muted playsinline preload="none" poster="Assets/3d%20Animations/VMC/Copertina_ICON.webp" controls>
+          <video loop muted playsinline preload="metadata" poster="Assets/3d%20Animations/VMC/Copertina_ICON.webp" controls>
             <source src="Assets/3d%20Animations/VMC/Video_ICON-U_1080P.mp4" type="video/mp4">
           </video>
           <div class="play-overlay">
@@ -2046,23 +2046,24 @@
       const overlay = card.querySelector('.play-overlay');
 
       if (video && overlay) {
-        // Quando clicchi sulla copertina elegante
+        // Quando clicchi sull'overlay custom
         overlay.addEventListener('click', async () => {
-          // Nascondi subito l'overlay
+          // Aggiungi la classe per nascondere l'overlay tramite CSS
           card.classList.add('playing');
           
           try {
-            // Tenta di far partire il video
             await video.play();
           } catch (err) {
-            // Se il browser o GitHub bloccano il play() via Javascript
-            // per via del peso, l'overlay è comunque sparito 
-            // e l'utente può premere il tasto Play nativo che è rimasto sotto.
-            console.warn('Play via Javascript bloccato, uso controlli nativi.', err);
+            console.warn('Play via Javascript bloccato, l\'utente può usare i controlli nativi.', err);
           }
         });
 
-        // Se l'utente mette in pausa dal tasto nativo, rimettiamo l'overlay elegante
+        // Ascolta l'evento play nativo (se l'utente clicca sul play del browser)
+        video.addEventListener('play', () => {
+          card.classList.add('playing');
+        });
+
+        // Se l'utente mette in pausa dal tasto nativo
         video.addEventListener('pause', () => {
           card.classList.remove('playing');
         });
