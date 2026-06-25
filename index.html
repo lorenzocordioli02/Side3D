@@ -1576,7 +1576,7 @@
       </div>
       <div class="videos-grid reveal">
         <div class="video-card">
-          <video loop muted playsinline preload="metadata" poster="Assets/3d%20Animations/GEMINI/Copertina_Gemini.webp" controls>
+          <video loop muted playsinline preload="metadata" poster="Assets/3d%20Animations/GEMINI/Copertina_Gemini.webp">
             <source src="Assets/3d%20Animations/GEMINI/GEMINI_VIDEO_1080P.mp4" type="video/mp4">
           </video>
           <div class="play-overlay">
@@ -1584,7 +1584,7 @@
           </div>
         </div>
         <div class="video-card">
-          <video loop muted playsinline preload="metadata" poster="Assets/3d%20Animations/MATAROA/Copertina_MATAROA.webp" controls>
+          <video loop muted playsinline preload="metadata" poster="Assets/3d%20Animations/MATAROA/Copertina_MATAROA.webp">
             <source src="Assets/3d%20Animations/MATAROA/MATAROA%20FINAL_V1.mp4" type="video/mp4">
           </video>
           <div class="play-overlay">
@@ -1592,7 +1592,7 @@
           </div>
         </div>
         <div class="video-card">
-          <video loop muted playsinline preload="metadata" poster="Assets/3d%20Animations/ONE/Coeprtina_ONE.webp" controls>
+          <video loop muted playsinline preload="metadata" poster="Assets/3d%20Animations/ONE/Coeprtina_ONE.webp">
             <source src="Assets/3d%20Animations/ONE/VIDEO_ONE-M_1080P.mp4" type="video/mp4">
           </video>
           <div class="play-overlay">
@@ -1600,7 +1600,7 @@
           </div>
         </div>
         <div class="video-card">
-          <video loop muted playsinline preload="metadata" poster="Assets/3d%20Animations/VMC/Copertina_ICON.webp" controls>
+          <video loop muted playsinline preload="metadata" poster="Assets/3d%20Animations/VMC/Copertina_ICON.webp">
             <source src="Assets/3d%20Animations/VMC/Video_ICON-U_1080P.mp4" type="video/mp4">
           </video>
           <div class="play-overlay">
@@ -2050,6 +2050,8 @@
         overlay.addEventListener('click', async () => {
           // Aggiungi la classe per nascondere l'overlay tramite CSS
           card.classList.add('playing');
+          // Abilita i controlli nativi solo ora
+          video.controls = true;
           
           try {
             await video.play();
@@ -2061,11 +2063,14 @@
         // Ascolta l'evento play nativo (se l'utente clicca sul play del browser)
         video.addEventListener('play', () => {
           card.classList.add('playing');
+          video.controls = true;
         });
 
         // Se l'utente mette in pausa dal tasto nativo
         video.addEventListener('pause', () => {
           card.classList.remove('playing');
+          // Opzionale: puoi rimuovere i controlli quando in pausa se vuoi mostrare l'overlay pulito
+          // video.controls = false; 
         });
       }
     });
