@@ -613,11 +613,6 @@
       width: 100%; height: 100%;
       object-fit: cover;
     }
-    /* Hide the giant native play button on iOS/Safari so it doesn't block clicks */
-    .video-card video::-webkit-media-controls-start-playback-button {
-      display: none !important;
-      -webkit-appearance: none;
-    }
     .video-card:nth-child(1),
     .video-card:nth-child(2) {
       grid-column: span 2;
@@ -636,8 +631,7 @@
       align-items: center;
       background: rgba(0, 0, 0, 0.2);
       transition: opacity 0.3s ease, background 0.3s ease;
-      /* Rendiamo l'overlay trasparente ai click. L'utente clicca direttamente il video. */
-      pointer-events: none;
+      cursor: pointer;
     }
     .video-card.playing .play-overlay {
       opacity: 0;
@@ -2046,17 +2040,30 @@
 
   <!-- ░░ SCRIPT ░░ -->
   <script>
-    // Custom Video Logic - L'interazione utente è 100% nativa per bypassare restrizioni iOS/GitHub
+    // Custom Video Click-to-Play Logic (Robust Fallback per GitHub Pages)
     document.querySelectorAll('.video-card').forEach(card => {
       const video = card.querySelector('video');
+      const overlay = card.querySelector('.play-overlay');
 
-      if (video) {
-        // Ascolta l'evento play nativo
+      if (video && overlay) {
+        // Quando clicchi sull'overlay custom
+        overlay.addEventListener('click', async () => {
+          // Aggiungi la classe per nascondere l'overlay tramite CSS
+          card.classList.add('playing');
+          
+          try {
+            await video.play();
+          } catch (err) {
+            console.warn('Play via Javascript bloccato, l\'utente può usare i controlli nativi.', err);
+          }
+        });
+
+        // Ascolta l'evento play nativo (se l'utente clicca sul play del browser)
         video.addEventListener('play', () => {
           card.classList.add('playing');
         });
 
-        // Ascolta l'evento pause nativo
+        // Se l'utente mette in pausa dal tasto nativo
         video.addEventListener('pause', () => {
           card.classList.remove('playing');
         });
