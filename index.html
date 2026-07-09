@@ -344,6 +344,8 @@
     .hero-stat {
       display: flex;
       flex-direction: column;
+      flex: 1 1 200px;
+      max-width: 280px;
     }
     .hero-stat-num {
       font-family: var(--mono);
@@ -622,6 +624,10 @@
       width: 100%; height: 100%;
       object-fit: cover;
     }
+    .video-card video:fullscreen,
+    .video-card video:-webkit-full-screen {
+      object-fit: contain !important;
+    }
     .video-card:nth-child(1),
     .video-card:nth-child(2) {
       grid-column: span 2;
@@ -659,6 +665,11 @@
       align-items: center;
       transition: transform 0.3s ease, background 0.3s ease;
       box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    @media (max-width: 760px) {
+      .play-overlay {
+        display: none !important;
+      }
     }
     .play-btn-circle::after {
       content: '';
@@ -831,7 +842,6 @@
     }
 
     /* Text column */
-    .about-text {}
     .about-text .section-title { margin-bottom: 1.5rem; }
     .about-text p {
       font-size: 1rem;
@@ -1389,7 +1399,11 @@
       .about-services { grid-template-columns: 1fr; }
       .about-service-item { border-right: none; }
       .nav-links { display: none; }
+      nav .lang-selector.desktop-lang { display: none; }
       .hero-bg-text { font-size: 22vw; }
+    }
+    @media (min-width: 761px) {
+      nav .lang-selector.mobile-lang { display: none; }
     }
     @media (max-width: 480px) {
       .chapter-num  { font-size: 5rem; }
@@ -1407,11 +1421,17 @@
       <div class="nav-logo-dot"></div>
       SIDE 3D STUDIO
     </div>
+    <!-- Mobile Lang Selector -->
+    <div class="lang-selector mobile-lang" style="position: absolute; left: 50%; transform: translateX(-50%); margin: 0;">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <span class="lang-div">/</span>
+      <button class="lang-btn" onclick="setLang('it')">IT</button>
+    </div>
     <ul class="nav-links">
       <li><a href="#portfolio" data-it="Lavori">Work</a></li>
       <li><a href="#about" data-it="Chi Sono">About</a></li>
       <li><a href="#contact" data-it="Contatti">Contact</a></li>
-      <li class="lang-selector">
+      <li class="lang-selector desktop-lang">
         <button class="lang-btn active" onclick="setLang('en')">EN</button>
         <span class="lang-div">/</span>
         <button class="lang-btn" onclick="setLang('it')">IT</button>
@@ -1436,8 +1456,8 @@
         <span class="word-terra">to</span>&nbsp;<span class="word-gold">ignore.</span>
       </h1>
 
-      <p class="hero-sub" data-it="Creiamo visual 3D e animazioni che fermano lo scroll, generano fiducia istantanea e trasformano i visitatori in clienti — senza bisogno di set fotografici.">
-        We make 3D visuals and animations that stop the scroll, build instant trust, and turn browsers into buyers — no photo shoot needed.
+      <p class="hero-sub" data-it="Creo visual 3D e animazioni che fermano lo scroll, generano fiducia istantanea e trasformano i visitatori in clienti — senza bisogno di set fotografici.">
+        I make 3D visuals and animations that stop the scroll, build instant trust, and turn browsers into buyers — no photo shoot needed.
       </p>
 
       <div class="hero-btns">
@@ -1448,12 +1468,12 @@
 
     <div class="hero-bottom">
       <div class="hero-stat">
-        <div class="hero-stat-num">50<span>+</span></div>
-        <div class="hero-stat-label" data-it="Brand elevati">Brands elevated</div>
+        <div class="hero-stat-num">100<span>%</span></div>
+        <div class="hero-stat-label" data-it="Fedeltà e accuratezza visiva del prodotto">Visual fidelity and product accuracy</div>
       </div>
       <div class="hero-stat">
-        <div class="hero-stat-num">3<span>×</span></div>
-        <div class="hero-stat-label" data-it="Aumento medio CTR">Avg. CTR uplift</div>
+        <div class="hero-stat-num">2<span style="color: var(--gold); font-size: 0.9em; margin: 0 4px;">in</span>1</div>
+        <div class="hero-stat-label" data-it="Strategia di Marketing & Produzione Visiva CGI.">Marketing Strategy & CGI Production</div>
       </div>
       <div class="hero-stat">
         <div class="hero-stat-num">48<span>h</span></div>
@@ -1752,7 +1772,7 @@
             <div class="step-content">
               <div class="step-tag tag tag-terra" data-it="Scoperta">Discovery</div>
               <h4 data-it="Call di Scoperta">Discovery Call</h4>
-              <p data-it="Parliamo del tuo prodotto, del tuo brand e di cosa hai bisogno. Niente gergo tecnico — solo chiarezza su cosa stiamo costruendo e perché.">We talk about your product, your brand, and what you need. No jargon — just clarity on what we're building and why.</p>
+              <p data-it="Parliamo del tuo prodotto, del tuo brand e di cosa hai bisogno. Niente gergo tecnico — solo chiarezza su cosa sto costruendo e perché.">We talk about your product, your brand, and what you need. No jargon — just clarity on what I'm building and why.</p>
             </div>
           </div>
           
@@ -1824,8 +1844,8 @@
         <div class="section-eyebrow" data-it="La persona dietro ai render">The Person Behind the Renders</div>
         <h2 class="section-title" data-it="Costruito per brand<br>che vogliono vincere.">Built for brands<br>that want to win.</h2>
 
-        <p data-it="<strong>Il tuo prodotto merita visual migliori.</strong> La maggior parte dei brand ecommerce perde vendite perché le foto dei loro prodotti sembrano economiche o generiche. Noi risolviamo questo problema con il 3D — niente campioni fisici, niente studio fotografico, nessuna attesa di settimane.">
-          <strong>Your product deserves better visuals.</strong> Most ecommerce brands lose sales because their product photos look cheap or generic. We fix that with 3D — no samples, no studio, no waiting weeks.
+        <p data-it="<strong>Il tuo prodotto merita visual migliori.</strong> La maggior parte dei brand ecommerce perde vendite perché le foto dei loro prodotti sembrano economiche o generiche. Io risolvo questo problema con il 3D — niente campioni fisici, niente studio fotografico, nessuna attesa di settimane.">
+          <strong>Your product deserves better visuals.</strong> Most ecommerce brands lose sales because their product photos look cheap or generic. I fix that with 3D — no samples, no studio, no waiting weeks.
         </p>
         <p data-it="Sono Lorenzo, un artista 3D specializzato in visualizzazione di prodotto, animazione e video AI per brand ecommerce. Il mio obiettivo è semplice: far sembrare il tuo prodotto <strong>così bello che i clienti si fidano prima ancora di cliccare.</strong>">
           I'm Lorenzo, a 3D artist specialising in product visualisation, animation, and AI video for ecommerce brands. My goal is simple: make your product look <strong>so good that customers trust it before they click.</strong>
@@ -1865,8 +1885,8 @@
 
       <div class="section-eyebrow" data-it="Contatti">Contact</div>
 
-      <h2 class="contact-title" data-it="Creiamo<br>qualcosa di<br><em>grande.</em>">
-        Let's make<br>
+      <h2 class="contact-title" data-it="Creo<br>qualcosa di<br><em>grande.</em>">
+        I create<br>
         something<br>
         <em>great.</em>
       </h2>
@@ -2086,7 +2106,7 @@
       
       // Update active button classes
       document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-      document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+      document.querySelectorAll(`.lang-btn[onclick="setLang('${lang}')"]`).forEach(btn => btn.classList.add('active'));
       
       // Translate all elements with data-it attribute
       document.querySelectorAll('[data-it]').forEach(el => {
