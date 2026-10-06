@@ -605,14 +605,17 @@
       opacity: 0.6;
     }
 
-    /* Videos — 2×2 grid */
+    /* Videos */
     .videos-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3rem;
       margin-bottom: 4rem;
     }
     .video-card {
+      width: 85%;
+      max-width: 1200px;
       border-radius: var(--radius-lg);
       overflow: hidden;
       background: var(--bg-card);
@@ -620,17 +623,15 @@
       aspect-ratio: 16/9;
       position: relative;
     }
-    .video-card video {
+    .video-card video,
+    .video-card iframe {
       width: 100%; height: 100%;
       object-fit: cover;
+      border: none;
     }
     .video-card video:fullscreen,
     .video-card video:-webkit-full-screen {
       object-fit: contain !important;
-    }
-    .video-card:nth-child(1),
-    .video-card:nth-child(2) {
-      grid-column: span 2;
     }
 
     /* Custom Play Button Overlay */
@@ -1392,9 +1393,8 @@
     }
     @media (max-width: 760px) {
       .products-grid { grid-template-columns: 1fr; }
-      .videos-grid   { grid-template-columns: 1fr; }
-      .video-card:nth-child(1),
-      .video-card:nth-child(2) { grid-column: span 1; }
+      .videos-grid   { gap: 1.5rem; }
+      .video-card    { width: 100%; }
       .gallery-grid  { grid-template-columns: 1fr; }
       .about-services { grid-template-columns: 1fr; }
       .about-service-item { border-right: none; }
@@ -1599,42 +1599,25 @@
         <p class="section-sub" data-it="Animazioni dinamiche e contenuti video di alta qualità progettati per fermare lo scroll e catturare il tuo pubblico.">Dynamic animations and high-quality video content designed to stop the scroll and captivate your audience.</p>
       </div>
 
-      <!-- VIDEOS (4) -->
+      <!-- VIDEOS (5) -->
       <div class="subsection-label reveal">
-        <span data-it="Video">Videos</span> <span data-it="04 clip">04 clips</span>
+        <span data-it="Video">Videos</span> <span data-it="05 clip">05 clips</span>
       </div>
       <div class="videos-grid reveal">
         <div class="video-card">
-          <video loop muted playsinline preload="metadata" poster="Assets/3d%20Animations/GEMINI/Copertina_Gemini.webp" controls>
-            <source src="Assets/3d%20Animations/GEMINI/GEMINI_VIDEO_1080P.mp4" type="video/mp4">
-          </video>
-          <div class="play-overlay">
-            <div class="play-btn-circle"></div>
-          </div>
+          <iframe src="https://www.youtube.com/embed/O6Ix8o9T7wk?autoplay=0&rel=0&showinfo=0" title="Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <div class="video-card">
-          <video loop muted playsinline preload="metadata" poster="Assets/3d%20Animations/MATAROA/Copertina_MATAROA.webp" controls>
-            <source src="Assets/3d%20Animations/MATAROA/MATAROA%20FINAL_V1.mp4" type="video/mp4">
-          </video>
-          <div class="play-overlay">
-            <div class="play-btn-circle"></div>
-          </div>
+          <iframe src="https://www.youtube.com/embed/I4mRY-RAL6k?autoplay=0&rel=0&showinfo=0" title="Video Gemini" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <div class="video-card">
-          <video loop muted playsinline preload="metadata" poster="Assets/3d%20Animations/ONE/Coeprtina_ONE.webp" controls>
-            <source src="Assets/3d%20Animations/ONE/VIDEO_ONE-M_1080P.mp4" type="video/mp4">
-          </video>
-          <div class="play-overlay">
-            <div class="play-btn-circle"></div>
-          </div>
+          <iframe src="https://www.youtube.com/embed/tvamWiI2yIY?autoplay=0&rel=0&showinfo=0" title="Video Mataroa" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <div class="video-card">
-          <video loop muted playsinline preload="metadata" poster="Assets/3d%20Animations/VMC/Copertina_ICON.webp" controls>
-            <source src="Assets/3d%20Animations/VMC/Video_ICON-U_1080P.mp4" type="video/mp4">
-          </video>
-          <div class="play-overlay">
-            <div class="play-btn-circle"></div>
-          </div>
+          <iframe src="https://www.youtube.com/embed/mLQyU-ZjfcA?autoplay=0&rel=0&showinfo=0" title="Video ONE" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="video-card">
+          <iframe src="https://www.youtube.com/embed/C9_hakViik8?autoplay=0&rel=0&showinfo=0" title="Video ICON" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
       </div>
 
