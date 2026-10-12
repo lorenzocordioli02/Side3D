@@ -520,7 +520,7 @@
     .strip-item:nth-child(5n+3) .dot { background: var(--lavender); }
 
     /* ─── INTRO: statement + numbers ──────────────────── */
-    .intro { position: relative; background: var(--bg); padding: var(--section-y) 0 0; }
+    .intro { position: relative; background: var(--bg); padding: var(--section-y) 0 clamp(4rem, 8vw, 7rem); }
     .statement {
       max-width: 62rem;
       margin: clamp(2.75rem, 6vw, 4.75rem) auto;
@@ -645,7 +645,145 @@
     .subsection-label span:last-child { color: var(--terra); }
 
     /* ─── PORTFOLIO ───────────────────────────────────── */
-    #portfolio { background: var(--bg); padding: var(--section-y) 0; }
+    #portfolio { background: var(--bg); padding: 0 0 var(--section-y); }
+    .portfolio-start { padding-top: var(--section-y); }
+
+    /* ─── SAAS CONTENT SPOTLIGHT ──────────────────────
+       A language of its own: soft rounded UI, centred layout,
+       sentence-case type, an app window that stands up on scroll. */
+    .saas {
+      position: relative;
+      margin: 0 clamp(0.6rem, 1.8vw, 1.75rem);
+      padding: clamp(4rem, 8vw, 7rem) var(--pad-x) clamp(4rem, 8vw, 6.5rem);
+      border-radius: clamp(22px, 3vw, 36px);
+      background: var(--lavender);
+      color: var(--ink);
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .saas-glow { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+    .saas-glow span { position: absolute; border-radius: 50%; filter: blur(60px); }
+    .saas-glow .g1 {
+      width: min(560px, 70vw); aspect-ratio: 1;
+      top: -16%; right: -8%;
+      background: radial-gradient(circle, rgba(209,154,90,0.45) 0%, transparent 70%);
+      animation: blobDrift 14s ease-in-out infinite alternate;
+    }
+    .saas-glow .g2 {
+      width: min(480px, 64vw); aspect-ratio: 1;
+      bottom: -18%; left: -8%;
+      background: radial-gradient(circle, rgba(163,80,71,0.28) 0%, transparent 70%);
+      animation: blobDrift 12s ease-in-out infinite alternate-reverse;
+    }
+    .saas-glow .g3 {
+      width: min(1000px, 96vw); aspect-ratio: 16 / 10;
+      top: 62%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(ellipse, rgba(250,250,248,0.6) 0%, transparent 65%);
+    }
+    .saas-head { max-width: 860px; margin: 0 auto; text-align: center; }
+    .saas-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.5rem 1rem 0.5rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(250,250,248,0.75);
+      box-shadow: 0 0 0 1px rgba(26,23,21,0.06);
+      font-family: var(--display);
+      font-size: 0.88rem;
+      color: var(--ink);
+    }
+    .saas-badge i { width: 8px; height: 8px; border-radius: 50%; background: var(--terra); box-shadow: 0 0 0 4px rgba(163,80,71,0.18); flex-shrink: 0; }
+    .saas-title {
+      margin-top: 1.5rem;
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: clamp(2.6rem, 6.4vw, 6rem);
+      line-height: 0.98;
+      letter-spacing: -0.025em;
+    }
+    .saas-lead {
+      max-width: 52ch;
+      margin: 1.5rem auto 0;
+      font-family: var(--display);
+      font-size: clamp(1rem, 1.25vw, 1.15rem);
+      line-height: 1.65;
+      color: var(--ink-mid);
+    }
+    .saas-stage { --saas-p: 1; position: relative; margin-top: clamp(2.75rem, 5vw, 4.25rem); perspective: 1600px; }
+    .saas-window {
+      position: relative;
+      width: min(900px, 100%);
+      margin: 0 auto;
+      padding: 0 10px 10px;
+      border-radius: 20px;
+      background: var(--chapter-bg);
+      box-shadow: 0 0 0 1px rgba(26,23,21,0.08), 0 50px 90px -30px rgba(26,23,21,0.45), 0 20px 40px -20px rgba(26,23,21,0.3);
+      transform-origin: 50% 100%;
+      transform: rotateX(calc((1 - var(--saas-p)) * 18deg)) scale(calc(0.9 + var(--saas-p) * 0.1));
+    }
+    .saas-bar { display: grid; grid-template-columns: 4rem minmax(0, 1fr) 4rem; align-items: center; height: 42px; padding: 0 6px; }
+    .saas-dots { display: flex; gap: 7px; }
+    .saas-dots i { width: 10px; height: 10px; border-radius: 50%; background: var(--terra); }
+    .saas-dots i:nth-child(2) { background: var(--gold); }
+    .saas-dots i:nth-child(3) { background: var(--lavender); }
+    .saas-bar-title {
+      justify-self: center;
+      max-width: 100%;
+      padding: 0.3rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(245,243,239,0.07);
+      font-family: var(--display);
+      font-size: 0.8rem;
+      color: rgba(245,243,239,0.75);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .saas-screen { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 12px; background: #000; }
+    .saas-screen iframe { width: 100%; height: 100%; border: 0; }
+    .saas-facts {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+      max-width: 900px;
+      margin: 1.25rem auto 0;
+    }
+    .saas-fact {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      column-gap: 0.8rem;
+      align-items: center;
+      padding: 0.8rem 1.1rem 0.8rem 0.8rem;
+      border-radius: 16px;
+      background: rgba(250,250,248,0.94);
+      box-shadow: 0 0 0 1px rgba(26,23,21,0.05), 0 18px 40px -22px rgba(26,23,21,0.4);
+      text-align: left;
+    }
+    .saas-fact-icon { grid-row: span 2; display: grid; place-items: center; width: 2.5rem; height: 2.5rem; border-radius: 12px; }
+    .saas-fact-icon svg { width: 18px; height: 18px; }
+    .i-terra { background: var(--terra); color: var(--bg); }
+    .i-gold  { background: var(--gold); color: var(--ink); }
+    .i-ink   { background: var(--ink); color: var(--bg); }
+    .i-lav   { background: var(--lavender); color: var(--ink); }
+    .saas-fact-label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mid); }
+    .saas-fact-value { font-family: var(--display); font-size: 0.98rem; line-height: 1.3; color: var(--ink); }
+    @media (min-width: 1360px) {
+      .saas-window { width: min(880px, 64%); }
+      .saas-facts { position: absolute; inset: 0; display: block; max-width: none; margin: 0; pointer-events: none; }
+      .saas-fact {
+        position: absolute;
+        width: 220px;
+        pointer-events: auto;
+        transform: translate3d(calc((1 - var(--saas-p)) * var(--dx)), calc((1 - var(--saas-p)) * 28px), 0);
+        opacity: calc(0.1 + var(--saas-p) * 0.9);
+      }
+      .saas-fact.f1 { --dx: -80px; left: 0;  top: 6%;  rotate: -3deg; }
+      .saas-fact.f2 { --dx: -80px; left: 0;  top: 56%; rotate: 2deg; }
+      .saas-fact.f3 { --dx: 80px;  right: 0; top: 18%; rotate: 2.5deg; }
+      .saas-fact.f4 { --dx: 80px;  right: 0; top: 66%; rotate: -2deg; }
+    }
 
     /* Stacked panels (sticky on desktop) */
     .stack { position: relative; margin-top: clamp(1.75rem, 3vw, 2.5rem); }
@@ -743,13 +881,87 @@
       .panel-media { max-height: calc(100svh - var(--nav-h) - 5.5rem); }
     }
 
-    /* Videos */
-    .videos-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: clamp(0.9rem, 2vw, 1.5rem);
-      margin-top: clamp(1.5rem, 3vw, 2.25rem);
+    /* ─── CHAPTER 02: SCREENING ROOM (one screen + clip strip) ── */
+    .cinema {
+      position: relative;
+      margin-top: clamp(0.75rem, 2vw, 1.5rem);   /* thin cream strip: separates it from panel 06 */
+      padding: var(--section-y) 0;
+      background: #000;                            /* completely black */
+      color: var(--bg);
+      overflow: hidden;
+      isolation: isolate;
     }
+    /* Screen + strip always fit in one view (strip ≈ 0.675 × width in height) */
+    .cinema-player {
+      max-width: min(100%, calc((100svh - var(--nav-h) - 4.5rem) / 0.675));
+      margin: clamp(1.5rem, 3vw, 2.25rem) auto 0;
+    }
+    .cinema-screen {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: #000;
+      border-radius: var(--radius);
+      box-shadow: 0 0 0 1px rgba(245,243,239,0.12);
+    }
+    .cinema-screen iframe { width: 100%; height: 100%; border: 0; }
+    .cinema-list {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: clamp(0.5rem, 1.2vw, 1rem);
+      margin-top: clamp(0.75rem, 1.6vw, 1.25rem);
+    }
+    .cinema-item {
+      position: relative;
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: #000;
+      box-shadow: 0 0 0 1px rgba(245,243,239,0.14);
+      opacity: 0.55;
+      filter: saturate(0.4);
+      transition: opacity 0.3s, filter 0.3s, box-shadow 0.3s;
+    }
+    .cinema-item img { width: 100%; height: 100%; object-fit: cover; }
+    .cinema-item::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      z-index: 1;
+      width: 30px; height: 30px;
+      transform: translate(-50%, -50%);
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Ccircle cx='15' cy='15' r='15' fill='%23141210' fill-opacity='.65'/%3E%3Cpath d='M12.5 10l7.5 5-7.5 5z' fill='%23F5F3EF'/%3E%3C/svg%3E") center / 100% no-repeat;
+      transition: opacity 0.3s;
+    }
+    .cinema-item:hover, .cinema-item:focus-visible { opacity: 0.92; filter: none; }
+    .cinema-item.is-active { opacity: 1; filter: none; box-shadow: 0 0 0 2px var(--gold); }
+    .cinema-item.is-active::before { opacity: 0; }
+    .cinema-num {
+      position: absolute;
+      left: 0.55rem;
+      bottom: 0.4rem;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      color: var(--bg);
+      text-shadow: 0 1px 8px rgba(0,0,0,0.75);
+    }
+    .cinema-item.is-active .cinema-num::after { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+
+    /* Chapter elements on a dark band */
+    [data-theme="dark"] .chapter-row { color: rgba(245,243,239,0.62); }
+    [data-theme="dark"] .chapter-label { color: var(--bg); }
+    [data-theme="dark"] .chapter-num { color: var(--gold); }
+    [data-theme="dark"] .section-sub { color: rgba(245,243,239,0.74); }
+    [data-theme="dark"] .subsection-label { color: var(--bg); border-bottom-color: rgba(245,243,239,0.12); }
+    [data-theme="dark"] .subsection-label span:last-child { color: var(--gold); }
+
+    /* Legacy <video> card (kept for the click-to-play script) */
     .video-card {
       position: relative;
       aspect-ratio: 16 / 9;
@@ -758,7 +970,6 @@
       border: 1px solid var(--rule);
       border-radius: var(--radius);
     }
-    .video-card:first-child { grid-column: 1 / -1; }
     .video-card video,
     .video-card iframe { width: 100%; height: 100%; object-fit: cover; border: none; }
     .video-card video:fullscreen,
@@ -1333,7 +1544,22 @@
       .chapter-row { grid-template-columns: auto minmax(0, 1fr); }
       .chapter-eyebrow { grid-column: 2; text-align: left; }
 
-      .videos-grid { grid-template-columns: minmax(0, 1fr); }
+      .cinema-list {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+        margin-inline: calc(var(--pad-x) * -1);
+        padding-inline: var(--pad-x);
+        scroll-padding-inline: var(--pad-x);
+      }
+      .cinema-list::-webkit-scrollbar { display: none; }
+      .cinema-list li { flex: 0 0 44vw; scroll-snap-align: start; }
+      .saas-facts { grid-template-columns: minmax(0, 1fr); }
+      .saas-window { padding: 0 6px 6px; border-radius: 14px; }
+      .saas-screen { border-radius: 9px; }
+      .saas-bar { height: 34px; grid-template-columns: 3rem minmax(0, 1fr) 3rem; }
+      .saas-dots i { width: 8px; height: 8px; }
       .about-services { grid-template-columns: minmax(0, 1fr); }
 
       .contact-form { grid-template-columns: minmax(0, 1fr); }
@@ -1511,11 +1737,58 @@
     </div>
   </section>
 
-  <!-- ░░ PORTFOLIO (chapters 01, 02, 03) ░░ -->
+  <!-- ░░ WORK: SaaS spotlight + chapters 01, 02, 03 ░░ -->
   <section id="portfolio" data-theme="light">
 
+    <!-- SAAS CONTENT — 2D &amp; 3D motion (spotlight with its own style) -->
+    <div class="saas" id="saas" data-theme="light">
+      <div class="saas-glow" aria-hidden="true"><span class="g1"></span><span class="g2"></span><span class="g3"></span></div>
+
+      <div class="saas-head">
+        <span class="saas-badge"><i aria-hidden="true"></i><span data-it="Contenuti SaaS · Motion 2D e 3D">SaaS Content · 2D &amp; 3D Motion</span></span>
+        <h2 class="saas-title" data-it="Motion che<br>converte.">Motion that<br>converts.</h2>
+        <p class="saas-lead" data-it="Video di presentazione dell'app Evernote, realizzato come esercizio assegnato da Bending Spoons. Motion 2D e 3D pensato per coinvolgere l'utente e convincerlo a fare l'upgrade del piano.">Presentation video for the Evernote app, created as an exercise assigned by Bending Spoons. 2D and 3D motion designed to engage users and convince them to upgrade their plan.</p>
+      </div>
+
+      <div class="saas-stage">
+        <div class="saas-window">
+          <div class="saas-bar">
+            <span class="saas-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="saas-bar-title">Evernote · <span data-it="Video di presentazione">Presentation video</span></span>
+            <span aria-hidden="true"></span>
+          </div>
+          <div class="saas-screen">
+            <iframe src="https://www.youtube.com/embed/c-K-4gZdBmM?autoplay=0&rel=0&showinfo=0" title="Evernote — presentation video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+
+        <ul class="saas-facts" role="list">
+          <li class="saas-fact f1">
+            <span class="saas-fact-icon i-terra" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M9 10h6M9 14h4"/></svg></span>
+            <span class="saas-fact-label">App</span>
+            <span class="saas-fact-value">Evernote</span>
+          </li>
+          <li class="saas-fact f2">
+            <span class="saas-fact-icon i-gold" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h5M10 16h5"/></svg></span>
+            <span class="saas-fact-label" data-it="Contesto">Context</span>
+            <span class="saas-fact-value" data-it="Esercizio di Bending Spoons">Exercise by Bending Spoons</span>
+          </li>
+          <li class="saas-fact f3">
+            <span class="saas-fact-icon i-ink" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 16V8M8.8 11.2 12 8l3.2 3.2"/></svg></span>
+            <span class="saas-fact-label" data-it="Obiettivo">Goal</span>
+            <span class="saas-fact-value" data-it="Coinvolgimento → upgrade del piano">Engagement → plan upgrade</span>
+          </li>
+          <li class="saas-fact f4">
+            <span class="saas-fact-icon i-lav" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5l7.5 4.2v8.6L12 20.5l-7.5-4.2V7.7z"/><path d="M4.5 7.7 12 12l7.5-4.3M12 12v8.5"/></svg></span>
+            <span class="saas-fact-label" data-it="Formato">Format</span>
+            <span class="saas-fact-value" data-it="Motion 2D e 3D">2D &amp; 3D motion</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
     <!-- CHAPTER 01 -->
-    <div class="container">
+    <div class="container portfolio-start">
       <header class="chapter">
         <div class="xline" aria-hidden="true"></div>
         <div class="chapter-row">
@@ -1674,46 +1947,60 @@
 
     </div>
 
+    <!-- CHAPTER 02 — screening room: one screen, a strip to switch clips -->
+    <div class="cinema" data-theme="dark">
+      <div class="container">
+        <header class="chapter">
+          <div class="xline" aria-hidden="true"></div>
+          <div class="chapter-row">
+            <span class="chapter-num">02</span>
+            <span class="chapter-label" data-it="<strong>Animazione</strong>&amp; Video CGI">
+              <strong>Animation</strong>
+              &amp; CGI Video
+            </span>
+            <span class="chapter-eyebrow" data-it="Contenuti Animati">Motion Content</span>
+          </div>
+          <div class="chapter-head">
+            <h2 class="section-title fill" data-it="Diamo vita<br>ai prodotti.">Bringing products<br>to life.</h2>
+            <p class="section-sub" data-it="Animazioni dinamiche e contenuti video di alta qualità progettati per fermare lo scroll e catturare il tuo pubblico.">Dynamic animations and high-quality video content designed to stop the scroll and captivate your audience.</p>
+          </div>
+        </header>
+
+        <!-- VIDEOS (5) -->
+        <div class="subsection-label">
+          <span data-it="Video">Videos</span> <span data-it="05 clip">05 clips</span>
+        </div>
+        <div class="cinema-player reveal">
+          <div class="cinema-screen">
+            <iframe id="cinemaFrame" src="https://www.youtube.com/embed/O6Ix8o9T7wk?autoplay=0&rel=0&showinfo=0" title="Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <ul class="cinema-list" role="list" aria-label="Choose a video">
+            <li><button type="button" class="cinema-item is-active" aria-pressed="true" aria-label="Video" data-title="Video" data-src="https://www.youtube.com/embed/O6Ix8o9T7wk?autoplay=0&rel=0&showinfo=0">
+              <img src="https://i.ytimg.com/vi/O6Ix8o9T7wk/hqdefault.jpg" alt="" loading="lazy">
+              <span class="cinema-num">01</span>
+            </button></li>
+            <li><button type="button" class="cinema-item" aria-pressed="false" aria-label="Video Gemini" data-title="Video Gemini" data-src="https://www.youtube.com/embed/I4mRY-RAL6k?autoplay=0&rel=0&showinfo=0">
+              <img src="https://i.ytimg.com/vi/I4mRY-RAL6k/hqdefault.jpg" alt="" loading="lazy">
+              <span class="cinema-num">02</span>
+            </button></li>
+            <li><button type="button" class="cinema-item" aria-pressed="false" aria-label="Video Mataroa" data-title="Video Mataroa" data-src="https://www.youtube.com/embed/tvamWiI2yIY?autoplay=0&rel=0&showinfo=0">
+              <img src="https://i.ytimg.com/vi/tvamWiI2yIY/hqdefault.jpg" alt="" loading="lazy">
+              <span class="cinema-num">03</span>
+            </button></li>
+            <li><button type="button" class="cinema-item" aria-pressed="false" aria-label="Video ONE" data-title="Video ONE" data-src="https://www.youtube.com/embed/mLQyU-ZjfcA?autoplay=0&rel=0&showinfo=0">
+              <img src="https://i.ytimg.com/vi/mLQyU-ZjfcA/hqdefault.jpg" alt="" loading="lazy">
+              <span class="cinema-num">04</span>
+            </button></li>
+            <li><button type="button" class="cinema-item" aria-pressed="false" aria-label="Video ICON" data-title="Video ICON" data-src="https://www.youtube.com/embed/C9_hakViik8?autoplay=0&rel=0&showinfo=0">
+              <img src="https://i.ytimg.com/vi/C9_hakViik8/hqdefault.jpg" alt="" loading="lazy">
+              <span class="cinema-num">05</span>
+            </button></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
     <div class="container">
-      <!-- CHAPTER 02 -->
-      <header class="chapter chapter--spaced">
-        <div class="xline" aria-hidden="true"></div>
-        <div class="chapter-row">
-          <span class="chapter-num">02</span>
-          <span class="chapter-label" data-it="<strong>Animazione</strong>&amp; Video CGI">
-            <strong>Animation</strong>
-            &amp; CGI Video
-          </span>
-          <span class="chapter-eyebrow" data-it="Contenuti Animati">Motion Content</span>
-        </div>
-        <div class="chapter-head">
-          <h2 class="section-title fill" data-it="Diamo vita<br>ai prodotti.">Bringing products<br>to life.</h2>
-          <p class="section-sub" data-it="Animazioni dinamiche e contenuti video di alta qualità progettati per fermare lo scroll e catturare il tuo pubblico.">Dynamic animations and high-quality video content designed to stop the scroll and captivate your audience.</p>
-        </div>
-      </header>
-
-      <!-- VIDEOS (5) -->
-      <div class="subsection-label">
-        <span data-it="Video">Videos</span> <span data-it="05 clip">05 clips</span>
-      </div>
-      <div class="videos-grid reveal">
-        <div class="video-card">
-          <iframe src="https://www.youtube.com/embed/O6Ix8o9T7wk?autoplay=0&rel=0&showinfo=0" title="Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-        </div>
-        <div class="video-card">
-          <iframe src="https://www.youtube.com/embed/I4mRY-RAL6k?autoplay=0&rel=0&showinfo=0" title="Video Gemini" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-        </div>
-        <div class="video-card">
-          <iframe src="https://www.youtube.com/embed/tvamWiI2yIY?autoplay=0&rel=0&showinfo=0" title="Video Mataroa" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-        </div>
-        <div class="video-card">
-          <iframe src="https://www.youtube.com/embed/mLQyU-ZjfcA?autoplay=0&rel=0&showinfo=0" title="Video ONE" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-        </div>
-        <div class="video-card">
-          <iframe src="https://www.youtube.com/embed/C9_hakViik8?autoplay=0&rel=0&showinfo=0" title="Video ICON" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-        </div>
-      </div>
-
       <!-- CHAPTER 03 -->
       <header class="chapter chapter--spaced">
         <div class="xline" aria-hidden="true"></div>
@@ -2251,7 +2538,7 @@
     const uiText = {
       en: {
         images: 'images', close: 'Close', prev: 'Previous image', next: 'Next image',
-        gallery: 'Image gallery', image: 'Image', of: 'of',
+        gallery: 'Image gallery', image: 'Image', of: 'of', chooseVideo: 'Choose a video',
         required: 'Please fill in the required fields.',
         sending: 'Sending…', send: 'Send Message',
         sent: "✓ Message sent — I'll be in touch within 24 hours.",
@@ -2259,7 +2546,7 @@
       },
       it: {
         images: 'immagini', close: 'Chiudi', prev: 'Immagine precedente', next: 'Immagine successiva',
-        gallery: 'Galleria immagini', image: 'Immagine', of: 'di',
+        gallery: 'Galleria immagini', image: 'Immagine', of: 'di', chooseVideo: 'Scegli un video',
         required: 'Compila i campi obbligatori.',
         sending: 'Invio in corso…', send: 'Invia Messaggio',
         sent: '✓ Messaggio inviato — ti risponderò entro 24 ore.',
@@ -2292,6 +2579,9 @@
       carouselModal.querySelector('.carousel-prev').setAttribute('aria-label', t('prev'));
       carouselModal.querySelector('.carousel-next').setAttribute('aria-label', t('next'));
       if (currentGallery.length) carouselImg.alt = t('image') + ' ' + (currentSlide + 1) + ' ' + t('of') + ' ' + currentGallery.length;
+      // Video strip label
+      const cinemaList = document.querySelector('.cinema-list');
+      if (cinemaList) cinemaList.setAttribute('aria-label', t('chooseVideo'));
       // Submit button, if a message is not being sent
       const submitText = document.querySelector('.cf-submit-text');
       if (submitText && !document.getElementById('cfSubmitBtn').disabled) submitText.textContent = t('send');
@@ -2658,6 +2948,36 @@
         });
       });
 
+      /* ── SaaS spotlight: the app window stands up, the facts slide in ── */
+      const saasStage = document.querySelector('.saas-stage');
+      function updateSaas() {
+        if (!saasStage || reduceMotion) return;
+        const r = saasStage.getBoundingClientRect();
+        if (r.bottom < -100 || r.top > vh + 100) return;
+        saasStage.style.setProperty('--saas-p', clamp((vh - r.top) / (vh * 0.62)).toFixed(3));
+      }
+
+      /* ── Screening room: switch clips on the single screen ── */
+      const cinemaItems = Array.from(document.querySelectorAll('.cinema-item'));
+      cinemaItems.forEach(item => item.addEventListener('click', () => {
+        if (item.classList.contains('is-active')) return;
+        cinemaItems.forEach(b => {
+          b.classList.toggle('is-active', b === item);
+          b.setAttribute('aria-pressed', b === item ? 'true' : 'false');
+        });
+        // A fresh iframe avoids adding entries to the browser history
+        const old = document.getElementById('cinemaFrame');
+        const next = old.cloneNode(false);
+        next.removeAttribute('loading');
+        next.setAttribute('title', item.getAttribute('data-title'));
+        next.setAttribute('src', item.getAttribute('data-src').replace('autoplay=0', 'autoplay=1'));
+        old.replaceWith(next);
+        const r = next.getBoundingClientRect();
+        const player = next.closest('.cinema-player');
+        const pr = player.getBoundingClientRect();
+        if (pr.top < navH || pr.bottom > vh) player.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
+      }));
+
       /* ── 5. Titles fill letter by letter ── */
       const fills = Array.from(document.querySelectorAll('.fill'));
       function updateFills() {
@@ -2943,6 +3263,7 @@
           heroContent.style.opacity = heroProgress > 0 ? Math.max(0, 1 - heroProgress * 1.1).toFixed(3) : '';
         }
         updateNav(sy);
+        updateSaas();
         updateFills();
         updateGallery();
         updateTimeline();
