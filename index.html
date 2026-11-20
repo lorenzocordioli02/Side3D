@@ -653,7 +653,7 @@
        sentence-case type, an app window that stands up on scroll. */
     .saas {
       position: relative;
-      margin: 0 clamp(0.6rem, 1.8vw, 1.75rem);
+      margin: clamp(0.75rem, 2vw, 1.5rem) clamp(0.6rem, 1.8vw, 1.75rem) 0;
       padding: clamp(4rem, 8vw, 7rem) var(--pad-x) clamp(4rem, 8vw, 6.5rem);
       border-radius: clamp(22px, 3vw, 36px);
       background: var(--lavender);
@@ -881,10 +881,9 @@
       .panel-media { max-height: calc(100svh - var(--nav-h) - 5.5rem); }
     }
 
-    /* ─── CHAPTER 02: SCREENING ROOM (one screen + clip strip) ── */
+    /* ─── CHAPTER 01: SCREENING ROOM (one screen + clip strip) ── */
     .cinema {
       position: relative;
-      margin-top: clamp(0.75rem, 2vw, 1.5rem);   /* thin cream strip: separates it from panel 06 */
       padding: var(--section-y) 0;
       background: #000;                            /* completely black */
       color: var(--bg);
@@ -1735,62 +1734,72 @@
     </div>
   </section>
 
-  <!-- ░░ WORK: SaaS spotlight + chapters 01, 02, 03 ░░ -->
+  <!-- ░░ WORK: chapters 01, 02 + SaaS spotlight + chapter 03 ░░ -->
   <section id="portfolio" data-theme="light">
 
-    <!-- SAAS CONTENT — 2D &amp; 3D motion (spotlight with its own style) -->
-    <div class="saas" id="saas" data-theme="light">
-      <div class="saas-glow" aria-hidden="true"><span class="g1"></span><span class="g2"></span><span class="g3"></span></div>
-
-      <div class="saas-head">
-        <span class="saas-badge"><i aria-hidden="true"></i><span data-it="Contenuti SaaS · Motion 2D e 3D">SaaS Content · 2D &amp; 3D Motion</span></span>
-        <h2 class="saas-title" data-it="Motion che<br>converte.">Motion that<br>converts.</h2>
-        <p class="saas-lead" data-it="Video di presentazione dell'app Evernote, realizzato come esercizio assegnato da Bending Spoons. Motion 2D e 3D pensato per coinvolgere l'utente e convincerlo a fare l'upgrade del piano.">Presentation video for the Evernote app, created as an exercise assigned by Bending Spoons. 2D and 3D motion designed to engage users and convince them to upgrade their plan.</p>
-      </div>
-
-      <div class="saas-stage">
-        <div class="saas-window">
-          <div class="saas-bar">
-            <span class="saas-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-            <span class="saas-bar-title">Evernote · <span data-it="Video di presentazione">Presentation video</span></span>
-            <span aria-hidden="true"></span>
+    <!-- CHAPTER 01 — screening room: one screen, a strip to switch clips -->
+    <div class="cinema" data-theme="dark">
+      <div class="container">
+        <header class="chapter">
+          <div class="xline" aria-hidden="true"></div>
+          <div class="chapter-row">
+            <span class="chapter-num">01</span>
+            <span class="chapter-label" data-it="<strong>Animazione</strong>&amp; Video CGI">
+              <strong>Animation</strong>
+              &amp; CGI Video
+            </span>
+            <span class="chapter-eyebrow" data-it="Contenuti Animati">Motion Content</span>
           </div>
-          <div class="saas-screen">
-            <iframe src="https://www.youtube.com/embed/c-K-4gZdBmM?autoplay=0&rel=0&showinfo=0" title="Evernote — presentation video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          <div class="chapter-head">
+            <h2 class="section-title fill" data-it="Diamo vita<br>ai prodotti.">Bringing products<br>to life.</h2>
+            <p class="section-sub" data-it="Animazioni dinamiche e contenuti video di alta qualità progettati per fermare lo scroll e catturare il tuo pubblico.">Dynamic animations and high-quality video content designed to stop the scroll and captivate your audience.</p>
           </div>
+        </header>
+
+        <!-- VIDEOS (6) -->
+        <div class="subsection-label">
+          <span data-it="Video">Videos</span> <span data-it="06 clip">06 clips</span>
         </div>
-
-        <ul class="saas-facts" role="list">
-          <li class="saas-fact f1">
-            <span class="saas-fact-icon i-terra" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M9 10h6M9 14h4"/></svg></span>
-            <span class="saas-fact-label">App</span>
-            <span class="saas-fact-value">Evernote</span>
-          </li>
-          <li class="saas-fact f2">
-            <span class="saas-fact-icon i-gold" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h5M10 16h5"/></svg></span>
-            <span class="saas-fact-label" data-it="Contesto">Context</span>
-            <span class="saas-fact-value" data-it="Esercizio di Bending Spoons">Exercise by Bending Spoons</span>
-          </li>
-          <li class="saas-fact f3">
-            <span class="saas-fact-icon i-ink" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 16V8M8.8 11.2 12 8l3.2 3.2"/></svg></span>
-            <span class="saas-fact-label" data-it="Obiettivo">Goal</span>
-            <span class="saas-fact-value" data-it="Coinvolgimento → upgrade del piano">Engagement → plan upgrade</span>
-          </li>
-          <li class="saas-fact f4">
-            <span class="saas-fact-icon i-lav" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5l7.5 4.2v8.6L12 20.5l-7.5-4.2V7.7z"/><path d="M4.5 7.7 12 12l7.5-4.3M12 12v8.5"/></svg></span>
-            <span class="saas-fact-label" data-it="Formato">Format</span>
-            <span class="saas-fact-value" data-it="Motion 2D e 3D">2D &amp; 3D motion</span>
-          </li>
-        </ul>
+        <div class="cinema-player reveal">
+          <div class="cinema-screen">
+            <iframe id="cinemaFrame" src="https://www.youtube.com/embed/KAX9nkLTZ1w?si=Y2lgfLtIzUD-VVj0&autoplay=0&rel=0&showinfo=0" title="Video Product Animation CGI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <ul class="cinema-list" role="list" aria-label="Choose a video">
+            <li><button type="button" class="cinema-item is-active" aria-pressed="true" aria-label="Video Product Animation CGI" data-title="Video Product Animation CGI" data-src="https://www.youtube.com/embed/KAX9nkLTZ1w?si=Y2lgfLtIzUD-VVj0&autoplay=0&rel=0&showinfo=0">
+              <img src="https://i.ytimg.com/vi/KAX9nkLTZ1w/hqdefault.jpg" alt="" loading="lazy">
+              <span class="cinema-num">01</span>
+            </button></li>
+            <li><button type="button" class="cinema-item" aria-pressed="false" aria-label="Video Roku Gin" data-title="Video Roku Gin" data-src="https://www.youtube.com/embed/OOtzAhXaV70?si=WgZaBZWPKoUCK6Yd&autoplay=0&rel=0&showinfo=0">
+              <img src="https://i.ytimg.com/vi/OOtzAhXaV70/hqdefault.jpg" alt="" loading="lazy">
+              <span class="cinema-num">02</span>
+            </button></li>
+            <li><button type="button" class="cinema-item" aria-pressed="false" aria-label="Video Gemini" data-title="Video Gemini" data-src="https://www.youtube.com/embed/I4mRY-RAL6k?autoplay=0&rel=0&showinfo=0">
+              <img src="https://i.ytimg.com/vi/I4mRY-RAL6k/hqdefault.jpg" alt="" loading="lazy">
+              <span class="cinema-num">03</span>
+            </button></li>
+            <li><button type="button" class="cinema-item" aria-pressed="false" aria-label="Video Mataroa" data-title="Video Mataroa" data-src="https://www.youtube.com/embed/tvamWiI2yIY?autoplay=0&rel=0&showinfo=0">
+              <img src="https://i.ytimg.com/vi/tvamWiI2yIY/hqdefault.jpg" alt="" loading="lazy">
+              <span class="cinema-num">04</span>
+            </button></li>
+            <li><button type="button" class="cinema-item" aria-pressed="false" aria-label="Video ONE" data-title="Video ONE" data-src="https://www.youtube.com/embed/mLQyU-ZjfcA?autoplay=0&rel=0&showinfo=0">
+              <img src="https://i.ytimg.com/vi/mLQyU-ZjfcA/hqdefault.jpg" alt="" loading="lazy">
+              <span class="cinema-num">05</span>
+            </button></li>
+            <li><button type="button" class="cinema-item" aria-pressed="false" aria-label="Video ICON" data-title="Video ICON" data-src="https://www.youtube.com/embed/C9_hakViik8?autoplay=0&rel=0&showinfo=0">
+              <img src="https://i.ytimg.com/vi/C9_hakViik8/hqdefault.jpg" alt="" loading="lazy">
+              <span class="cinema-num">06</span>
+            </button></li>
+          </ul>
+        </div>
       </div>
     </div>
 
-    <!-- CHAPTER 01 -->
+    <!-- CHAPTER 02 -->
     <div class="container portfolio-start">
       <header class="chapter">
         <div class="xline" aria-hidden="true"></div>
         <div class="chapter-row">
-          <span class="chapter-num">01</span>
+          <span class="chapter-num">02</span>
           <span class="chapter-label" data-it="<strong>Visualizzazione</strong>Prodotto">
             <strong>Product</strong>
             Visualization
@@ -1945,60 +1954,50 @@
 
     </div>
 
-    <!-- CHAPTER 02 — screening room: one screen, a strip to switch clips -->
-    <div class="cinema" data-theme="dark">
-      <div class="container">
-        <header class="chapter">
-          <div class="xline" aria-hidden="true"></div>
-          <div class="chapter-row">
-            <span class="chapter-num">02</span>
-            <span class="chapter-label" data-it="<strong>Animazione</strong>&amp; Video CGI">
-              <strong>Animation</strong>
-              &amp; CGI Video
-            </span>
-            <span class="chapter-eyebrow" data-it="Contenuti Animati">Motion Content</span>
-          </div>
-          <div class="chapter-head">
-            <h2 class="section-title fill" data-it="Diamo vita<br>ai prodotti.">Bringing products<br>to life.</h2>
-            <p class="section-sub" data-it="Animazioni dinamiche e contenuti video di alta qualità progettati per fermare lo scroll e catturare il tuo pubblico.">Dynamic animations and high-quality video content designed to stop the scroll and captivate your audience.</p>
-          </div>
-        </header>
+    <!-- SAAS CONTENT — 2D &amp; 3D motion (spotlight with its own style) -->
+    <div class="saas" id="saas" data-theme="light">
+      <div class="saas-glow" aria-hidden="true"><span class="g1"></span><span class="g2"></span><span class="g3"></span></div>
 
-        <!-- VIDEOS (6) -->
-        <div class="subsection-label">
-          <span data-it="Video">Videos</span> <span data-it="06 clip">06 clips</span>
-        </div>
-        <div class="cinema-player reveal">
-          <div class="cinema-screen">
-            <iframe id="cinemaFrame" src="https://www.youtube.com/embed/KAX9nkLTZ1w?si=YpdQt1XSsx3QWTi6" title="Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+      <div class="saas-head">
+        <span class="saas-badge"><i aria-hidden="true"></i><span data-it="Contenuti SaaS · Motion 2D e 3D">SaaS Content · 2D &amp; 3D Motion</span></span>
+        <h2 class="saas-title" data-it="Motion che<br>converte.">Motion that<br>converts.</h2>
+        <p class="saas-lead" data-it="Video di presentazione dell'app Evernote, realizzato come esercizio assegnato da Bending Spoons. Motion 2D e 3D pensato per coinvolgere l'utente e convincerlo a fare l'upgrade del piano.">Presentation video for the Evernote app, created as an exercise assigned by Bending Spoons. 2D and 3D motion designed to engage users and convince them to upgrade their plan.</p>
+      </div>
+
+      <div class="saas-stage">
+        <div class="saas-window">
+          <div class="saas-bar">
+            <span class="saas-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="saas-bar-title">Evernote · <span data-it="Video di presentazione">Presentation video</span></span>
+            <span aria-hidden="true"></span>
           </div>
-          <ul class="cinema-list" role="list" aria-label="Choose a video">
-            <li><button type="button" class="cinema-item is-active" aria-pressed="true" aria-label="Video" data-title="Video" data-src="https://www.youtube.com/embed/KAX9nkLTZ1w?si=YpdQt1XSsx3QWTi6">
-              <img src="https://i.ytimg.com/vi/KAX9nkLTZ1w/hqdefault.jpg" alt="" loading="lazy">
-              <span class="cinema-num">01</span>
-            </button></li>
-            <li><button type="button" class="cinema-item" aria-pressed="false" aria-label="Video Roku Gin" data-title="Video Roku Gin" data-src="https://www.youtube.com/embed/OOtzAhXaV70?si=WgZaBZWPKoUCK6Yd&autoplay=0&rel=0&showinfo=0">
-              <img src="https://i.ytimg.com/vi/OOtzAhXaV70/hqdefault.jpg" alt="" loading="lazy">
-              <span class="cinema-num">02</span>
-            </button></li>
-            <li><button type="button" class="cinema-item" aria-pressed="false" aria-label="Video Gemini" data-title="Video Gemini" data-src="https://www.youtube.com/embed/I4mRY-RAL6k?autoplay=0&rel=0&showinfo=0">
-              <img src="https://i.ytimg.com/vi/I4mRY-RAL6k/hqdefault.jpg" alt="" loading="lazy">
-              <span class="cinema-num">03</span>
-            </button></li>
-            <li><button type="button" class="cinema-item" aria-pressed="false" aria-label="Video Mataroa" data-title="Video Mataroa" data-src="https://www.youtube.com/embed/tvamWiI2yIY?autoplay=0&rel=0&showinfo=0">
-              <img src="https://i.ytimg.com/vi/tvamWiI2yIY/hqdefault.jpg" alt="" loading="lazy">
-              <span class="cinema-num">04</span>
-            </button></li>
-            <li><button type="button" class="cinema-item" aria-pressed="false" aria-label="Video ONE" data-title="Video ONE" data-src="https://www.youtube.com/embed/mLQyU-ZjfcA?autoplay=0&rel=0&showinfo=0">
-              <img src="https://i.ytimg.com/vi/mLQyU-ZjfcA/hqdefault.jpg" alt="" loading="lazy">
-              <span class="cinema-num">05</span>
-            </button></li>
-            <li><button type="button" class="cinema-item" aria-pressed="false" aria-label="Video ICON" data-title="Video ICON" data-src="https://www.youtube.com/embed/C9_hakViik8?autoplay=0&rel=0&showinfo=0">
-              <img src="https://i.ytimg.com/vi/C9_hakViik8/hqdefault.jpg" alt="" loading="lazy">
-              <span class="cinema-num">06</span>
-            </button></li>
-          </ul>
+          <div class="saas-screen">
+            <iframe src="https://www.youtube.com/embed/c-K-4gZdBmM?autoplay=0&rel=0&showinfo=0" title="Evernote — presentation video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          </div>
         </div>
+
+        <ul class="saas-facts" role="list">
+          <li class="saas-fact f1">
+            <span class="saas-fact-icon i-terra" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M9 10h6M9 14h4"/></svg></span>
+            <span class="saas-fact-label">App</span>
+            <span class="saas-fact-value">Evernote</span>
+          </li>
+          <li class="saas-fact f2">
+            <span class="saas-fact-icon i-gold" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h5M10 16h5"/></svg></span>
+            <span class="saas-fact-label" data-it="Contesto">Context</span>
+            <span class="saas-fact-value" data-it="Esercizio di Bending Spoons">Exercise by Bending Spoons</span>
+          </li>
+          <li class="saas-fact f3">
+            <span class="saas-fact-icon i-ink" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 16V8M8.8 11.2 12 8l3.2 3.2"/></svg></span>
+            <span class="saas-fact-label" data-it="Obiettivo">Goal</span>
+            <span class="saas-fact-value" data-it="Coinvolgimento → upgrade del piano">Engagement → plan upgrade</span>
+          </li>
+          <li class="saas-fact f4">
+            <span class="saas-fact-icon i-lav" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5l7.5 4.2v8.6L12 20.5l-7.5-4.2V7.7z"/><path d="M4.5 7.7 12 12l7.5-4.3M12 12v8.5"/></svg></span>
+            <span class="saas-fact-label" data-it="Formato">Format</span>
+            <span class="saas-fact-value" data-it="Motion 2D e 3D">2D &amp; 3D motion</span>
+          </li>
+        </ul>
       </div>
     </div>
 
