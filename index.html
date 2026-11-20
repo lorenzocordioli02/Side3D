@@ -907,7 +907,7 @@
     .cinema-screen iframe { width: 100%; height: 100%; border: 0; }
     .cinema-list {
       display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
+      grid-template-columns: repeat(6, minmax(0, 1fr));
       gap: clamp(0.5rem, 1.2vw, 1rem);
       margin-top: clamp(0.75rem, 1.6vw, 1.25rem);
     }
@@ -1964,34 +1964,38 @@
           </div>
         </header>
 
-        <!-- VIDEOS (5) -->
+        <!-- VIDEOS (6) -->
         <div class="subsection-label">
-          <span data-it="Video">Videos</span> <span data-it="05 clip">05 clips</span>
+          <span data-it="Video">Videos</span> <span data-it="06 clip">06 clips</span>
         </div>
         <div class="cinema-player reveal">
           <div class="cinema-screen">
-            <iframe id="cinemaFrame" src="https://www.youtube.com/embed/KAX9nkLTZ1w?si=YpdQt1XSsx3QWTi6" title="Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            <iframe id="cinemaFrame" src="https://www.youtube.com/embed/KAX9nkLTZ1w?si=YpdQt1XSsx3QWTi6" title="Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
           </div>
           <ul class="cinema-list" role="list" aria-label="Choose a video">
             <li><button type="button" class="cinema-item is-active" aria-pressed="true" aria-label="Video" data-title="Video" data-src="https://www.youtube.com/embed/KAX9nkLTZ1w?si=YpdQt1XSsx3QWTi6">
               <img src="https://i.ytimg.com/vi/KAX9nkLTZ1w/hqdefault.jpg" alt="" loading="lazy">
               <span class="cinema-num">01</span>
             </button></li>
+            <li><button type="button" class="cinema-item" aria-pressed="false" aria-label="Video Roku Gin" data-title="Video Roku Gin" data-src="https://www.youtube.com/embed/OOtzAhXaV70?si=WgZaBZWPKoUCK6Yd&autoplay=0&rel=0&showinfo=0">
+              <img src="https://i.ytimg.com/vi/OOtzAhXaV70/hqdefault.jpg" alt="" loading="lazy">
+              <span class="cinema-num">02</span>
+            </button></li>
             <li><button type="button" class="cinema-item" aria-pressed="false" aria-label="Video Gemini" data-title="Video Gemini" data-src="https://www.youtube.com/embed/I4mRY-RAL6k?autoplay=0&rel=0&showinfo=0">
               <img src="https://i.ytimg.com/vi/I4mRY-RAL6k/hqdefault.jpg" alt="" loading="lazy">
-              <span class="cinema-num">02</span>
+              <span class="cinema-num">03</span>
             </button></li>
             <li><button type="button" class="cinema-item" aria-pressed="false" aria-label="Video Mataroa" data-title="Video Mataroa" data-src="https://www.youtube.com/embed/tvamWiI2yIY?autoplay=0&rel=0&showinfo=0">
               <img src="https://i.ytimg.com/vi/tvamWiI2yIY/hqdefault.jpg" alt="" loading="lazy">
-              <span class="cinema-num">03</span>
+              <span class="cinema-num">04</span>
             </button></li>
             <li><button type="button" class="cinema-item" aria-pressed="false" aria-label="Video ONE" data-title="Video ONE" data-src="https://www.youtube.com/embed/mLQyU-ZjfcA?autoplay=0&rel=0&showinfo=0">
               <img src="https://i.ytimg.com/vi/mLQyU-ZjfcA/hqdefault.jpg" alt="" loading="lazy">
-              <span class="cinema-num">04</span>
+              <span class="cinema-num">05</span>
             </button></li>
             <li><button type="button" class="cinema-item" aria-pressed="false" aria-label="Video ICON" data-title="Video ICON" data-src="https://www.youtube.com/embed/C9_hakViik8?autoplay=0&rel=0&showinfo=0">
               <img src="https://i.ytimg.com/vi/C9_hakViik8/hqdefault.jpg" alt="" loading="lazy">
-              <span class="cinema-num">05</span>
+              <span class="cinema-num">06</span>
             </button></li>
           </ul>
         </div>
